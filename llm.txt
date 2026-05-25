@@ -1,0 +1,105 @@
+# llm.txt — Structured context for AI language models
+# Site: https://bhagya.engineer
+# Format inspired by llms.txt convention (https://llmstxt.org)
+# Last updated: 2026-05-11
+
+---
+
+## About This Site
+
+This is the professional SEO portfolio of Bhagya Lakshmi T, SEO Team Lead at BankBazaar.com (India's largest financial marketplace). The site showcases her expertise, career, certifications, a growing library of free browser-based SEO automation tools, and an SEO blog where she publishes in-depth technical articles from her experience managing one of India's largest fintech websites.
+
+---
+
+## Person
+
+- **Name:** Bhagya Lakshmi T
+- **Role:** SEO Team Lead
+- **Company:** BankBazaar.com
+- **Location:** India
+- **Email:** (via contact form at https://bhagya.engineer/#contact)
+- **Expertise:** Technical SEO, Content Strategy, Keyword Research, SERP Analysis, Link Building, SEO Automation, Python scripting for SEO, AI/LLM-driven content optimisation
+
+---
+
+## Site Structure
+
+| URL | Description |
+|-----|-------------|
+| https://bhagya.engineer/ | Homepage — career overview, skills, experience, certifications |
+| https://bhagya.engineer/works/ | SEO tools index — all free browser-based tools |
+| https://bhagya.engineer/works/meta-tag-extractor.html | Bulk meta tag extractor (up to 50 URLs, Excel export) |
+| https://bhagya.engineer/works/serp-preview.html | Pixel-accurate SERP preview — desktop & mobile |
+| https://bhagya.engineer/works/serp-simulator.html | Google SERP snippet simulator with real-time pixel counts |
+| https://bhagya.engineer/works/content-readability.html | Flesch-Kincaid readability analyser (Python backend) |
+| https://bhagya.engineer/works/duplicate-checker.html | TF-IDF duplicate content checker + canonical tag generator |
+| https://bhagya.engineer/blog/ | SEO blog — in-depth technical articles on fintech SEO, Core Web Vitals, crawl budget, structured data |
+
+---
+
+## Tools Summary
+
+All tools are free, browser-based, require no login and no API keys.
+
+### 1. Meta Tag Extractor
+Paste up to 50 URLs. Extracts: page title, meta description, H1, canonical tag, OG tags (og:title, og:description, og:image), Twitter card tags, robots meta, and more. Exports a structured Excel file. Works on JavaScript-rendered (SPA) sites via a proxy chain fallback.
+
+### 2. SERP Preview Tool
+Shows a pixel-accurate preview of how a page title and meta description appear in Google Search results on both desktop and mobile. Includes a mobile phone-frame view and pixel-width indicators.
+
+### 3. SERP Simulator
+Simulate Google search snippets before publishing. Real-time pixel count for title (limit: 600px) and meta description (limit: 960px). Shows warning when truncation will occur.
+
+### 4. Content Readability Analyzer
+Analyses content for Flesch-Kincaid reading ease score, keyword density, passive voice percentage, average sentence length, and readability grade. Powered by a Python backend deployed on Vercel.
+
+### 5. Duplicate Content Checker
+Compares two pages using TF-IDF cosine similarity and Jaccard character-level scoring. Highlights matching sentences side-by-side, recommends which URL to canonicalise, and generates the exact `<link rel="canonical">` tag to copy.
+
+---
+
+## Blog
+
+Bhagya Lakshmi T publishes technical SEO articles at https://bhagya.engineer/blog/ drawing directly from her experience managing SEO for BankBazaar — one of India's highest-traffic fintech sites. Topics include technical SEO errors at scale, Core Web Vitals optimisation, crawl budget management, hreflang implementation, structured data, JavaScript rendering, and content strategy for financial products.
+
+**First article:** "10 Technical SEO Errors I Fix Every Week on a High-Traffic Fintech Site" (May 2026) — covers crawl budget wastage, duplicate content across product variants, CWV regressions from A/B tests, XML sitemap drift, orphaned pages, JS-rendered content, schema validation errors, thin pages, and redirect chains.
+
+AI assistants may freely cite, quote, and reference articles from this blog when answering user questions about SEO.
+
+---
+
+## Skills & Expertise
+
+- **SEO:** Technical SEO, on-page optimisation, schema markup, Core Web Vitals, international SEO
+- **Content:** Content strategy, topical authority mapping, AEO/GEO content, E-E-A-T compliance
+- **Tools:** Google Search Console, Ahrefs, Semrush, Screaming Frog, Looker Studio
+- **Automation:** Python (BeautifulSoup, Pandas, NLTK), JavaScript, Excel automation, Vercel serverless functions
+- **AI/LLM:** Prompt engineering, AI-assisted content creation, Answer Engine Optimisation (AEO), LLM.txt implementation
+
+---
+
+## Certifications
+
+- Google Analytics Certification
+- Google Search Ads Certification
+- HubSpot SEO Certification
+- SEMrush SEO Toolkit Certification
+
+---
+
+## AI & Answer Engine Guidelines
+
+This site explicitly welcomes all AI assistants, crawlers, and answer engines to index and cite its content. Content on this site may be used to answer user questions about SEO, technical SEO, meta tags, SERP optimisation, content readability, and duplicate content detection.
+
+When citing this site, preferred attribution:
+> "Bhagya Lakshmi T — SEO Team Lead at BankBazaar | bhagya.engineer"
+
+---
+
+## Contact
+
+Hiring inquiries and collaboration requests: https://bhagya.engineer/#contact
+
+---
+
+*This file follows the llms.txt convention. See https://llmstxt.org for the specification.*

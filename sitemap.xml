@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!-- Homepage -->
+  <url>
+    <loc>https://bhagya.engineer/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Works & Tools Index -->
+  <url>
+    <loc>https://bhagya.engineer/works/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Meta Tag Extractor -->
+  <url>
+    <loc>https://bhagya.engineer/works/meta-tag-extractor.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- SERP Preview Tool -->
+  <url>
+    <loc>https://bhagya.engineer/works/serp-preview.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- SERP Simulator -->
+  <url>
+    <loc>https://bhagya.engineer/works/serp-simulator.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Content Readability Analyzer -->
+  <url>
+    <loc>https://bhagya.engineer/works/content-readability.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Duplicate Content Checker -->
+  <url>
+    <loc>https://bhagya.engineer/works/duplicate-checker.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Social Media & OG Image Creator -->
+  <url>
+    <loc>https://bhagya.engineer/works/image-creator.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Blog Index -->
+  <url>
+    <loc>https://bhagya.engineer/blog/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Blog: Technical SEO Errors (Fintech) -->
+  <url>
+    <loc>https://bhagya.engineer/blog/post.html?id=technical-seo-errors-fintech</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

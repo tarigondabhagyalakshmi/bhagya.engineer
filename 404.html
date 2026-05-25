@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNL3R9YSHG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SNL3R9YSHG');
+</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>404 — Page Not Found | Bhagya Lakshmi T</title>
+<meta name="description" content="The page you're looking for doesn't exist. Explore Bhagya Lakshmi T's SEO tools and portfolio instead."/>
+<meta name="robots" content="noindex,follow"/>
+<link rel="canonical" href="https://bhagya.engineer/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"/></noscript>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080614;
+  --card:rgba(255,255,255,.03);
+  --border:rgba(255,255,255,.08);
+  --muted:#64748B;
+  --purple:#7C3AED;
+  --purple-light:#C4B5FD;
+}
+html,body{min-height:100vh;background:var(--bg);color:#fff;font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+
+/* ── Particles canvas ── */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── Layout ── */
+.wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+
+/* ── 404 number ── */
+.four-wrap{position:relative;margin-bottom:8px}
+.four{
+  font-size:clamp(7rem,20vw,14rem);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.04em;
+  background:linear-gradient(135deg,#7C3AED 0%,#4F46E5 40%,#0D9488 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  user-select:none;
+  position:relative;
+  display:inline-block;
+}
+.four::after{
+  content:'404';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#7C3AED,#4F46E5,#0D9488);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:blur(40px);
+  opacity:.4;
+  z-index:-1;
+}
+
+/* ── Badge ── */
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(124,58,237,.12);
+  border:1px solid rgba(124,58,237,.3);
+  color:var(--purple-light);
+  font-size:.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:4px 14px;border-radius:50px;
+  margin-bottom:20px;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#7C3AED;animation:pulse 2s infinite}
+
+/* ── Heading ── */
+.heading{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:12px;line-height:1.2}
+.sub{color:var(--muted);font-size:.95rem;max-width:480px;line-height:1.7;margin:0 auto 36px}
+
+/* ── Primary CTA ── */
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:56px}
+.btn-home{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#7C3AED,#4F46E5);
+  color:#fff;font-weight:700;font-size:.9rem;
+  padding:13px 28px;border-radius:12px;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 8px 32px rgba(124,58,237,.35);
+}
+.btn-home:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(124,58,237,.5)}
+.btn-works{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;font-weight:700;font-size:.9rem;
+  padding:13px 28px;border-radius:12px;
+  text-decoration:none;
+  transition:transform .2s,background .2s;
+}
+.btn-works:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
+
+/* ── Section label ── */
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-bottom:20px;
+}
+
+/* ── Tool cards grid ── */
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  max-width:800px;
+  width:100%;
+  margin-bottom:40px;
+}
+.tool-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  text-decoration:none;
+  color:inherit;
+  text-align:left;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  position:relative;
+  overflow:hidden;
+}
+.tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--tc,rgba(124,58,237,.06)),transparent);opacity:0;transition:opacity .3s}
+.tool-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.tool-card:hover::before{opacity:1}
+.tc-icon{font-size:1.4rem;margin-bottom:10px;display:block}
+.tc-name{font-weight:700;font-size:.85rem;margin-bottom:4px;color:#fff}
+.tc-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
+.tc-arrow{display:inline-block;margin-top:8px;font-size:.75rem;color:var(--purple-light);font-weight:700;transition:transform .2s}
+.tool-card:hover .tc-arrow{transform:translateX(4px)}
+
+/* ── Quick links ── */
+.quick-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px}
+.ql{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#94A3B8;
+  font-size:.78rem;font-weight:600;
+  padding:7px 16px;border-radius:8px;
+  text-decoration:none;
+  transition:all .2s;
+}
+.ql:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.16)}
+
+/* ── Footer note ── */
+.foot-note{font-size:.72rem;color:var(--muted)}
+.foot-note a{color:var(--purple-light);text-decoration:none}
+.foot-note a:hover{text-decoration:underline}
+
+/* ── Animations ── */
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-1{animation:fadeUp .6s ease both}
+.fade-2{animation:fadeUp .6s ease .1s both}
+.fade-3{animation:fadeUp .6s ease .2s both}
+.fade-4{animation:fadeUp .6s ease .3s both}
+.fade-5{animation:fadeUp .6s ease .4s both}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .tools-grid{grid-template-columns:1fr 1fr}
+  .four{font-size:clamp(5rem,22vw,8rem)}
+}
+@media(max-width:400px){
+  .tools-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="wrap">
+
+  <!-- 404 number -->
+  <div class="four-wrap fade-1">
+    <div class="four">404</div>
+  </div>
+
+  <!-- Badge -->
+  <div class="badge fade-1">
+    <span class="badge-dot"></span>
+    Page Not Found
+  </div>
+
+  <!-- Heading -->
+  <h1 class="heading fade-2">Oops — this page doesn't exist&nbsp;(yet)</h1>
+  <p class="sub fade-2">You might have followed a broken link, mistyped a URL, or this page was moved. Don't leave — there's plenty to explore below.</p>
+
+  <!-- CTAs -->
+  <div class="cta-row fade-3">
+    <a href="https://bhagya.engineer/" class="btn-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>
+      Back to Home
+    </a>
+    <a href="https://bhagya.engineer/works/" class="btn-works">
+      🛠️ Explore All Tools →
+    </a>
+  </div>
+
+  <!-- Tools grid -->
+  <div class="section-label fade-3">✦ Free SEO Tools — No Login Required</div>
+  <div class="tools-grid fade-4">
+
+    <a href="https://bhagya.engineer/works/meta-tag-extractor.html" class="tool-card" style="--tc:rgba(13,148,136,.1)">
+      <span class="tc-icon">🏷️</span>
+      <div class="tc-name">Meta Tag Extractor</div>
+      <div class="tc-desc">Bulk-audit title, meta desc, H1s, OG tags from 50 URLs. Excel export.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+    <a href="https://bhagya.engineer/works/serp-preview.html" class="tool-card" style="--tc:rgba(59,130,246,.1)">
+      <span class="tc-icon">🔍</span>
+      <div class="tc-name">SERP Preview Tool</div>
+      <div class="tc-desc">See how your page looks in Google — pixel-perfect desktop &amp; mobile.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+    <a href="https://bhagya.engineer/works/serp-simulator.html" class="tool-card" style="--tc:rgba(59,130,246,.08)">
+      <span class="tc-icon">🔎</span>
+      <div class="tc-name">SERP Simulator</div>
+      <div class="tc-desc">Simulate Google snippets with real-time pixel counts before you publish.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+    <a href="https://bhagya.engineer/works/content-readability.html" class="tool-card" style="--tc:rgba(139,92,246,.1)">
+      <span class="tc-icon">📖</span>
+      <div class="tc-name">Readability Analyzer</div>
+      <div class="tc-desc">Flesch-Kincaid score, keyword density, passive voice detection.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+    <a href="https://bhagya.engineer/works/duplicate-checker.html" class="tool-card" style="--tc:rgba(249,115,22,.08)">
+      <span class="tc-icon">📋</span>
+      <div class="tc-name">Duplicate Checker</div>
+      <div class="tc-desc">TF-IDF similarity score + canonical tag generator for duplicate content.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+    <a href="https://bhagya.engineer/works/image-creator.html" class="tool-card" style="--tc:rgba(236,72,153,.08)">
+      <span class="tc-icon">🖼️</span>
+      <div class="tc-name">Social Image Creator</div>
+      <div class="tc-desc">Design OG, Twitter, LinkedIn &amp; Square post images. Download PNG.</div>
+      <div class="tc-arrow">Open →</div>
+    </a>
+
+  </div>
+
+  <!-- Quick nav links -->
+  <div class="quick-links fade-5">
+    <a href="https://bhagya.engineer/#about" class="ql">👤 About</a>
+    <a href="https://bhagya.engineer/#expertise" class="ql">🎯 Expertise</a>
+    <a href="https://bhagya.engineer/#experience" class="ql">💼 Experience</a>
+    <a href="https://bhagya.engineer/#skills" class="ql">⚡ Skills</a>
+    <a href="https://bhagya.engineer/#certifications" class="ql">🏆 Certifications</a>
+    <a href="https://bhagya.engineer/#contact" class="ql">📩 Contact</a>
+  </div>
+
+  <!-- Footer note -->
+  <p class="foot-note fade-5">
+    Built by <a href="https://bhagya.engineer/">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar
+  </p>
+
+</div>
+
+<script>
+// Particles
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  class P {
+    constructor(){
+      this.x = Math.random()*W; this.y = Math.random()*H;
+      this.r = Math.random()*1.5+0.3;
+      this.vx = (Math.random()-.5)*.25; this.vy = (Math.random()-.5)*.25;
+      this.o = Math.random()*.35+.05;
+    }
+    update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0)this.x=W; if(this.x>W)this.x=0; if(this.y<0)this.y=H; if(this.y>H)this.y=0; }
+    draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(124,58,237,${this.o})`; ctx.fill(); }
+  }
+  for(let i=0;i<60;i++) particles.push(new P());
+  (function loop(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(loop); })();
+})();
+</script>
+</body>
+</html>

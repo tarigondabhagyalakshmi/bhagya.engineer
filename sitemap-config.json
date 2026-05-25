@@ -1,0 +1,55 @@
+{
+  "baseUrl": "https://bhagya.engineer",
+  "defaultChangefreq": "monthly",
+  "defaultPriority": 0.7,
+  "urls": [
+    {
+      "path": "/",
+      "changefreq": "weekly",
+      "priority": 1.0,
+      "label": "Homepage"
+    },
+    {
+      "path": "/works/",
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "label": "Works & Tools Index"
+    },
+    {
+      "path": "/works/meta-tag-extractor.html",
+      "changefreq": "monthly",
+      "priority": 0.85,
+      "label": "Meta Tag Extractor"
+    },
+    {
+      "path": "/works/serp-preview.html",
+      "changefreq": "monthly",
+      "priority": 0.85,
+      "label": "SERP Preview Tool"
+    },
+    {
+      "path": "/works/serp-simulator.html",
+      "changefreq": "monthly",
+      "priority": 0.85,
+      "label": "SERP Simulator"
+    },
+    {
+      "path": "/works/content-readability.html",
+      "changefreq": "monthly",
+      "priority": 0.85,
+      "label": "Content Readability Analyzer"
+    },
+    {
+      "path": "/works/duplicate-checker.html",
+      "changefreq": "monthly",
+      "priority": 0.85,
+      "label": "Duplicate Content Checker"
+    },
+    {
+      "path": "/works/image-creator.html",
+      "changefreq": "monthly",
+      "priority": 0.8,
+      "label": "Social Media & OG Image Creator"
+    }
+  ]
+}
