@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNL3R9YSHG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SNL3R9YSHG');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEO Blog | Bhagya Lakshmi T</title>
+<meta name="description" content="SEO insights, technical tips, automation ideas and fintech growth strategies from Bhagya Lakshmi T, SEO Team Lead at BankBazaar.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://bhagya.engineer/blog/">
+<meta property="og:title" content="SEO Blog | Bhagya Lakshmi T">
+<meta property="og:description" content="Tactical SEO from BankBazaar's SEO Team Lead.">
+<meta property="og:url" content="https://bhagya.engineer/blog/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF9;
+  --white:#FFFFFF;
+  --ink:#18171C;
+  --ink2:#3D3B45;
+  --muted:#72707E;
+  --muted2:#A8A6B4;
+  --rule:#E8E6EE;
+  --rule2:#D0CED8;
+  --gold:#B8720A;
+  --gold-lt:#F5E6CC;
+  --teal:#0A7B6B;
+  --teal-lt:#D4F0EB;
+  --rose:#C2334D;
+  --rose-lt:#FCE4E9;
+  --sky:#1A5FA8;
+  --sky-lt:#DDEEFF;
+  --sage:#1A7A45;
+  --sage-lt:#D4F0E2;
+  --plum:#5A3CA8;
+  --plum-lt:#EAE4F8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--rule2);border-radius:2px}
+
+/* ===== TOP BAR ===== */
+.topbar{background:var(--ink);color:rgba(255,255,255,.7);font-size:.7rem;text-align:center;padding:7px 20px;letter-spacing:.04em}
+.topbar span{color:var(--gold-lt)}
+
+/* ===== NAV ===== */
+.nav{background:var(--white);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1160px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.nav-logo span{color:var(--gold)}
+.nav-center{display:flex;gap:6px}
+.nav-center a{font-size:.8rem;font-weight:500;color:var(--muted);padding:5px 12px;border-radius:5px;transition:all .18s}
+.nav-center a:hover{color:var(--ink);background:var(--bg)}
+.nav-center a.active{color:var(--gold);font-weight:600}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-search{width:180px;padding:7px 12px 7px 32px;border:1px solid var(--rule2);border-radius:6px;font-size:.78rem;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);outline:none;transition:border .2s;position:relative}
+.nav-search-wrap{position:relative}
+.nav-search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.nav-search:focus{border-color:var(--rule2);box-shadow:0 0 0 3px rgba(184,114,10,.1)}
+.nav-btn{background:var(--gold);color:#fff;padding:7px 18px;border-radius:6px;font-weight:700;font-size:.76rem;border:none;cursor:pointer;transition:opacity .18s}
+.nav-btn:hover{opacity:.88}
+.nav-ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:4px;padding:4px}
+.nav-ham span{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px}
+
+/* ===== MOBILE NAV ===== */
+.mob{display:none;background:var(--white);border-bottom:1px solid var(--rule);padding:16px 24px;flex-direction:column;gap:2px}
+.mob.open{display:flex}
+.mob a{font-size:.9rem;font-weight:500;color:var(--ink2);padding:10px 0;border-bottom:1px solid var(--rule)}
+.mob a:last-child{border:none}
+.mob a.active{color:var(--gold)}
+
+/* ===== FEATURED POST ===== */
+.featured{max-width:1160px;margin:0 auto;padding:36px 32px 0}
+.featured-label{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.featured-label span{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+.featured-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.feat-card{display:grid;grid-template-columns:1fr 420px;border-radius:14px;overflow:hidden;border:1px solid var(--rule2);background:var(--white);transition:box-shadow .2s}
+.feat-card:hover{box-shadow:0 8px 40px rgba(0,0,0,.1)}
+.feat-img{background:linear-gradient(135deg,#F5E6CC 0%,#D4F0EB 50%,#DDEEFF 100%);min-height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.feat-img-pattern{position:absolute;inset:0;opacity:.4;background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(184,114,10,.06) 20px,rgba(184,114,10,.06) 21px),repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(184,114,10,.06) 20px,rgba(184,114,10,.06) 21px)}
+.feat-img-icon{font-size:4rem;position:relative;z-index:1}
+.feat-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+.feat-cat{display:inline-flex;margin-bottom:14px}
+.cat-tag{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:4px 11px;border-radius:4px}
+.feat-title{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:800;line-height:1.28;color:var(--ink);margin-bottom:12px;letter-spacing:-.02em}
+.feat-title:hover{color:var(--gold)}
+.feat-exc{font-size:.9rem;color:var(--ink2);line-height:1.78;margin-bottom:20px}
+.feat-meta{display:flex;align-items:center;gap:14px;border-top:1px solid var(--rule);padding-top:16px}
+.feat-avatar{width:34px;height:34px;border-radius:50%;background:var(--gold-lt);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:var(--gold);flex-shrink:0}
+.feat-author{font-size:.78rem;font-weight:600;color:var(--ink)}
+.feat-date{font-size:.72rem;color:var(--muted)}
+.feat-readmore{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700;color:var(--gold);transition:gap .18s}
+.feat-card:hover .feat-readmore{gap:9px}
+
+/* ===== MAIN LAYOUT ===== */
+.layout{max-width:1160px;margin:0 auto;padding:40px 32px 80px;display:grid;grid-template-columns:1fr 280px;gap:48px}
+
+/* ===== FILTER BAR ===== */
+.filter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.filter-bar-left{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.fpill{padding:5px 13px;border-radius:5px;border:1px solid var(--rule2);background:var(--white);color:var(--muted);font-size:.73rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s;white-space:nowrap}
+.fpill:hover{border-color:var(--rule2);color:var(--ink);background:var(--bg)}
+.fpill.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.filter-count{font-size:.72rem;color:var(--muted);font-weight:500}
+
+/* ===== POSTS GRID ===== */
+.posts-grid{display:flex;flex-direction:column;gap:0}
+.post-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.post-row.single{grid-template-columns:1fr}
+
+/* ===== ARTICLE CARD ===== */
+.art-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:all .2s;cursor:pointer}
+.art-card:hover{border-color:var(--rule2);box-shadow:0 4px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
+.art-card-img{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:2.5rem}
+.art-card-img-pattern{position:absolute;inset:0;opacity:.5}
+.art-card-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.art-cat{display:inline-flex;align-items:center;margin-bottom:10px}
+.art-title{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:700;line-height:1.45;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.art-card:hover .art-title{color:var(--gold)}
+.art-exc{font-size:.78rem;color:var(--muted);line-height:1.68;flex:1;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.art-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--rule)}
+.art-byline{display:flex;align-items:center;gap:6px}
+.art-av{width:22px;height:22px;border-radius:50%;background:var(--gold-lt);display:flex;align-items:center;justify-content:center;font-size:.52rem;font-weight:800;color:var(--gold)}
+.art-by-name{font-size:.68rem;font-weight:600;color:var(--ink2)}
+.art-by-date{font-size:.65rem;color:var(--muted)}
+.art-right{display:flex;align-items:center;gap:6px}
+.art-read-badge{font-size:.62rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--rule);padding:2px 7px;border-radius:3px}
+.art-arrow{font-size:.7rem;color:var(--gold);font-weight:700;opacity:0;transition:opacity .18s}
+.art-card:hover .art-arrow{opacity:1}
+
+/* ===== EMPTY ===== */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1}
+.empty-state h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink2);margin-bottom:8px}
+
+/* ===== SIDEBAR ===== */
+.sidebar{display:flex;flex-direction:column;gap:24px}
+.sb-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:20px}
+.sb-title{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sb-title::after{content:'';flex:1;height:1px;background:var(--rule)}
+.sb-about{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sb-av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold-lt),var(--teal-lt));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--gold);margin-bottom:10px}
+.sb-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.sb-role{font-size:.72rem;color:var(--muted);margin-bottom:10px}
+.sb-bio{font-size:.75rem;color:var(--ink2);line-height:1.65;margin-bottom:14px}
+.sb-link{display:block;text-align:center;background:var(--gold);color:#fff;padding:8px;border-radius:6px;font-size:.74rem;font-weight:700;transition:opacity .18s}
+.sb-link:hover{opacity:.88}
+.sb-cats{display:flex;flex-direction:column;gap:2px}
+.sb-cat{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;cursor:pointer;transition:background .18s;border:none;background:transparent;width:100%;text-align:left;font-family:'Inter',sans-serif}
+.sb-cat:hover{background:var(--bg)}
+.sb-cat.on{background:var(--gold-lt)}
+.sb-cat-name{font-size:.8rem;font-weight:600;color:var(--ink2);transition:color .18s}
+.sb-cat.on .sb-cat-name{color:var(--gold)}
+.sb-cat-n{font-size:.68rem;color:var(--muted);background:var(--bg);border:1px solid var(--rule);padding:1px 7px;border-radius:10px;font-weight:600}
+.sb-nl-form{display:flex;flex-direction:column;gap:8px}
+.sb-nl-input{padding:9px 12px;border:1px solid var(--rule2);border-radius:6px;font-size:.8rem;font-family:'Inter',sans-serif;color:var(--ink);outline:none;transition:border .2s}
+.sb-nl-input:focus{border-color:var(--gold)}
+.sb-nl-input::placeholder{color:var(--muted)}
+.sb-nl-btn{background:var(--ink);color:#fff;border:none;padding:9px;border-radius:6px;font-size:.78rem;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:background .18s}
+.sb-nl-btn:hover{background:var(--gold)}
+.sb-nl-ok{font-size:.74rem;color:var(--teal);font-weight:600;display:none;margin-top:4px;text-align:center}
+.sb-tags{display:flex;gap:6px;flex-wrap:wrap}
+.sb-tag{font-size:.68rem;padding:4px 10px;border:1px solid var(--rule2);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .18s;background:var(--bg)}
+.sb-tag:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-lt)}
+
+/* ===== PAGINATION ===== */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px;padding-top:24px;border-top:1px solid var(--rule)}
+.pg-btn{padding:7px 13px;border:1px solid var(--rule2);border-radius:5px;font-size:.76rem;font-weight:600;color:var(--muted);background:var(--white);cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif}
+.pg-btn:hover{border-color:var(--gold);color:var(--gold)}
+.pg-btn.on{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* ===== FOOTER ===== */
+.foot-divider{height:1px;background:var(--rule);margin:0 32px}
+.foot{max-width:1160px;margin:0 auto;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-brand{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
+.foot-brand span{color:var(--gold)}
+.foot-copy{font-size:.7rem;color:var(--muted)}
+.foot-links{display:flex;gap:18px}
+.foot-links a{font-size:.74rem;color:var(--muted);transition:color .18s}
+.foot-links a:hover{color:var(--gold)}
+
+/* ===== CATEGORY COLORS ===== */
+.c-gold{background:var(--gold-lt);color:var(--gold)}
+.c-teal{background:var(--teal-lt);color:var(--teal)}
+.c-rose{background:var(--rose-lt);color:var(--rose)}
+.c-sky{background:var(--sky-lt);color:var(--sky)}
+.c-sage{background:var(--sage-lt);color:var(--sage)}
+.c-plum{background:var(--plum-lt);color:var(--plum)}
+.ci-gold{background:linear-gradient(135deg,var(--gold-lt),#fff8ee)}
+.ci-teal{background:linear-gradient(135deg,var(--teal-lt),#f0faf8)}
+.ci-rose{background:linear-gradient(135deg,var(--rose-lt),#fff5f7)}
+.ci-sky{background:linear-gradient(135deg,var(--sky-lt),#f0f7ff)}
+.ci-sage{background:linear-gradient(135deg,var(--sage-lt),#f0faf4)}
+.ci-plum{background:linear-gradient(135deg,var(--plum-lt),#f5f2ff)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .feat-card{grid-template-columns:1fr}
+  .feat-img{min-height:180px}
+}
+@media(max-width:720px){
+  .post-row{grid-template-columns:1fr}
+  .nav-inner{padding:0 20px}
+  .featured{padding:24px 20px 0}
+  .layout{padding:28px 20px 60px}
+  .foot{padding:20px}
+}
+@media(max-width:600px){
+  .nav-center,.nav-search-wrap{display:none}
+  .nav-ham{display:flex}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">SEO insights from BankBazaar &mdash; by <span>Bhagya Lakshmi T</span></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://bhagya.engineer/" class="nav-logo">Bhagya<span>.</span></a>
+    <div class="nav-center">
+      <a href="https://bhagya.engineer/#about">About</a>
+      <a href="https://bhagya.engineer/#expertise">Expertise</a>
+      <a href="https://bhagya.engineer/works/">Tools</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="https://bhagya.engineer/#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search-wrap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="nav-search" id="navSearch" placeholder="Search articles..." oninput="doSearch()">
+      </div>
+      <a href="https://bhagya.engineer/#contact" class="nav-btn">Hire Me</a>
+      <button class="nav-ham" onclick="toggleMob()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob" id="mobNav">
+  <a href="https://bhagya.engineer/#about">About</a>
+  <a href="https://bhagya.engineer/#expertise">Expertise</a>
+  <a href="https://bhagya.engineer/works/">Tools</a>
+  <a href="/blog/" class="active">Blog</a>
+  <a href="https://bhagya.engineer/#contact">Contact</a>
+</div>
+
+<!-- FEATURED POST -->
+<div class="featured">
+  <div class="featured-label"><span>Featured</span></div>
+  <a href="#" class="feat-card" id="featCard">
+    <div class="feat-img ci-gold" id="featImg">
+      <div class="feat-img-pattern"></div>
+      <div class="feat-img-icon">&#128202;</div>
+    </div>
+    <div class="feat-body">
+      <div class="feat-cat"><span class="cat-tag c-gold" id="featCat">Loading</span></div>
+      <div class="feat-title" id="featTitle">Loading latest article&hellip;</div>
+      <div class="feat-exc" id="featExc">Fetching from posts database&hellip;</div>
+      <div class="feat-meta">
+        <div class="feat-avatar">BL</div>
+        <div>
+          <div class="feat-author">Bhagya Lakshmi T</div>
+          <div class="feat-date" id="featDate">SEO Team Lead &middot; BankBazaar</div>
+        </div>
+        <div class="feat-readmore" id="featRead">Read article <span>&rarr;</span></div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT: POSTS -->
+  <div>
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="filter-bar-left" id="fpillRow">
+        <button class="fpill on" onclick="setTag('all',this)">All Posts</button>
+      </div>
+      <span class="filter-count" id="fcount"></span>
+    </div>
+
+    <!-- Grid -->
+    <div id="postsWrap"></div>
+  </div>
+
+  <!-- RIGHT: SIDEBAR -->
+  <aside class="sidebar">
+    <!-- About -->
+    <div class="sb-card">
+      <div class="sb-title">About the Author</div>
+      <div class="sb-about">
+        <div class="sb-av">BL</div>
+        <div class="sb-name">Bhagya Lakshmi T</div>
+        <div class="sb-role">SEO Team Lead &middot; BankBazaar</div>
+        <p class="sb-bio">4+ years driving organic growth at one of India's largest fintech platforms. Writing about technical SEO, automation, and content strategy.</p>
+        <a href="https://bhagya.engineer/#contact" class="sb-link">Work with me</a>
+      </div>
+    </div>
+
+    <!-- Topics -->
+    <div class="sb-card">
+      <div class="sb-title">Browse Topics</div>
+      <div class="sb-cats" id="sbCats"></div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="sb-card">
+      <div class="sb-title">Newsletter</div>
+      <p style="font-size:.78rem;color:var(--ink2);line-height:1.65;margin-bottom:12px">Tactical SEO ideas from the fintech trenches &mdash; twice a month, no spam.</p>
+      <form class="sb-nl-form" onsubmit="subNL(event)">
+        <input type="email" class="sb-nl-input" id="nlEmail" placeholder="your@email.com" required>
+        <button type="submit" class="sb-nl-btn">Subscribe free &rarr;</button>
+      </form>
+      <div class="sb-nl-ok" id="nlOk">&#10003; Subscribed! Check your inbox.</div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sb-card">
+      <div class="sb-title">Popular Tags</div>
+      <div class="sb-tags" id="sbTags"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<div class="foot-divider"></div>
+<footer class="foot">
+  <div>
+    <div class="foot-brand">Bhagya<span>.</span> Lakshmi T</div>
+    <div class="foot-copy">SEO Team Lead &middot; BankBazaar</div>
+  </div>
+  <div class="foot-links">
+    <a href="https://bhagya.engineer/">Portfolio</a>
+    <a href="https://bhagya.engineer/works/">Tools</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://bhagya.engineer/#contact">Contact</a>
+    <a href="/blog/admin.html">Admin &#8599;</a>
+  </div>
+</footer>
+
+<script>
+var allPosts=[], activeTag='all', searchQ='';
+
+var CAT={
+  'Technical SEO':{chip:'c-gold',img:'ci-gold',icon:'128202'},
+  'On-Page SEO':{chip:'c-teal',img:'ci-teal',icon:'128203'},
+  'Automation':{chip:'c-sky',img:'ci-sky',icon:'9889'},
+  'Tools':{chip:'c-sky',img:'ci-sky',icon:'128295'},
+  'Case Study':{chip:'c-rose',img:'ci-rose',icon:'128200'},
+  'Keyword Research':{chip:'c-teal',img:'ci-teal',icon:'128269'},
+  'Analytics':{chip:'c-sage',img:'ci-sage',icon:'128201'},
+  'Link Building':{chip:'c-rose',img:'ci-rose',icon:'128279'},
+  'Content SEO':{chip:'c-plum',img:'ci-plum',icon:'128196'}
+};
+function cm(c){return CAT[c]||{chip:'c-gold',img:'ci-gold',icon:'128202'};}
+
+function init(){
+  fetch('/blog/posts.json?v='+Date.now())
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var now=new Date();
+      allPosts=(d.posts||[]).filter(function(p){
+        if(p.status==='published') return true;
+        if(p.status==='scheduled') return new Date(p.scheduledDate||p.publishDate)<=now;
+        return false;
+      }).sort(function(a,b){return new Date(b.publishDate)-new Date(a.publishDate);});
+      renderFeatured();
+      buildPills();
+      buildSidebar();
+      renderPosts();
+    })
+    .catch(function(){
+      document.getElementById('postsWrap').innerHTML='<div class="empty-state"><h3>Posts coming soon</h3><p>Check back shortly.</p></div>';
+    });
+}
+
+function renderFeatured(){
+  if(!allPosts.length) return;
+  var p=allPosts[0], m=cm(p.category);
+  var fc=document.getElementById('featCard');
+  fc.href='/blog/post.html?id='+p.slug;
+  document.getElementById('featImg').className='feat-img '+m.img;
+  document.getElementById('featImg').innerHTML='<div class="feat-img-pattern"></div><div class="feat-img-icon">&#'+m.icon+';</div>';
+  document.getElementById('featCat').className='cat-tag '+m.chip;
+  document.getElementById('featCat').textContent=p.category;
+  document.getElementById('featTitle').textContent=p.title;
+  document.getElementById('featExc').textContent=p.excerpt;
+  document.getElementById('featDate').textContent=fmtDate(p.publishDate)+' · '+p.readTime+' min read';
+  document.getElementById('featRead').innerHTML='Read article <span>&rarr;</span>';
+}
+
+function buildPills(){
+  var cats=[];
+  allPosts.forEach(function(p){if(cats.indexOf(p.category)<0)cats.push(p.category);});
+  var row=document.getElementById('fpillRow');
+  row.innerHTML='';
+  var ab=document.createElement('button');
+  ab.className='fpill on'; ab.textContent='All Posts';
+  ab.onclick=function(){setTag('all',this);};
+  row.appendChild(ab);
+  cats.forEach(function(c){
+    var b=document.createElement('button');
+    b.className='fpill'; b.textContent=c;
+    b.onclick=function(){setTag(c,this);};
+    row.appendChild(b);
+  });
+}
+
+function buildSidebar(){
+  // Categories with counts
+  var catMap={};
+  allPosts.forEach(function(p){ catMap[p.category]=(catMap[p.category]||0)+1; });
+  var sbCats=document.getElementById('sbCats');
+  if(sbCats){
+    sbCats.innerHTML='';
+    Object.keys(catMap).forEach(function(c){
+      var btn=document.createElement('button');
+      btn.className='sb-cat'; btn.dataset.cat=c;
+      btn.innerHTML='<span class="sb-cat-name">'+c+'</span><span class="sb-cat-n">'+catMap[c]+'</span>';
+      btn.onclick=function(){
+        document.querySelectorAll('.sb-cat').forEach(function(b){b.classList.remove('on');});
+        btn.classList.add('on');
+        var fpb=document.querySelector('.fpill.on');
+        if(fpb) fpb.classList.remove('on');
+        setTagNoBtn(c);
+      };
+      sbCats.appendChild(btn);
+    });
+  }
+  // Tags
+  var tagSet={};
+  allPosts.forEach(function(p){(p.tags||[]).forEach(function(t){tagSet[t]=(tagSet[t]||0)+1;});});
+  var sbTags=document.getElementById('sbTags');
+  if(sbTags){
+    sbTags.innerHTML='';
+    Object.keys(tagSet).sort().forEach(function(t){
+      var span=document.createElement('span');
+      span.className='sb-tag'; span.textContent=t;
+      span.onclick=function(){
+        document.getElementById('navSearch').value=t;
+        searchQ=t.toLowerCase();
+        renderPosts();
+      };
+      sbTags.appendChild(span);
+    });
+  }
+}
+
+function setTagNoBtn(cat){
+  activeTag=cat;
+  document.getElementById('postsWrap').scrollIntoView({behavior:'smooth',block:'start'});
+  renderPosts();
+}
+
+function setTag(cat,btn){
+  activeTag=cat;
+  document.querySelectorAll('.fpill').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.sb-cat').forEach(function(b){b.classList.remove('on');});
+  renderPosts();
+}
+
+function doSearch(){
+  searchQ=document.getElementById('navSearch').value.toLowerCase();
+  renderPosts();
+}
+
+function getFiltered(){
+  return allPosts.filter(function(p){
+    if(activeTag!=='all'&&p.category!==activeTag) return false;
+    if(!searchQ) return true;
+    return p.title.toLowerCase().indexOf(searchQ)>=0||
+      p.excerpt.toLowerCase().indexOf(searchQ)>=0||
+      (p.tags||[]).some(function(t){return t.toLowerCase().indexOf(searchQ)>=0;});
+  });
+}
+
+function fmtDate(iso){
+  try{return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}
+  catch(e){return iso||'';}
+}
+
+function renderPosts(){
+  var list=getFiltered();
+  var fc=document.getElementById('fcount');
+  if(fc) fc.textContent=list.length+(list.length===1?' article':' articles');
+  var wrap=document.getElementById('postsWrap');
+  if(!list.length){
+    wrap.innerHTML='<div class="empty-state"><h3>No articles found</h3><p>Try a different category or clear the search.</p></div>';
+    return;
+  }
+  // Build pairs of cards
+  var html='';
+  for(var i=0;i<list.length;i+=2){
+    var isSingle=(i+1>=list.length);
+    html+='<div class="post-row'+(isSingle?' single':'')+'">'+artCard(list[i],i);
+    if(!isSingle) html+=artCard(list[i+1],i+1);
+    html+='</div>';
+  }
+  wrap.innerHTML=html;
+}
+
+function artCard(p,i){
+  var m=cm(p.category);
+  var tags=(p.tags||[]).slice(0,2).map(function(t){
+    return '<span style="font-size:.6rem;padding:2px 7px;border:1px solid var(--rule2);border-radius:3px;color:var(--muted);margin-right:4px">'+t+'</span>';
+  }).join('');
+  var coverHtml=p.featuredImage
+    ? '<div class="art-card-img '+m.img+'" style="height:200px;padding:0;overflow:hidden"><img src="'+p.featuredImage+'" alt="'+p.title+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"></div>'
+    : '<div class="art-card-img '+m.img+'" style="height:200px"><div style="position:absolute;inset:0;opacity:.3;background-image:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(0,0,0,.03) 15px,rgba(0,0,0,.03) 16px)"></div><span style="position:relative;font-size:2rem">&#'+m.icon+';</span></div>';
+  return '<a href="/blog/post.html?id='+p.slug+'" class="art-card">'+
+    coverHtml+
+    '<div class="art-card-body">'+
+    '<div class="art-cat"><span class="cat-tag '+m.chip+'" style="font-size:.58rem;font-weight:800;letter-spacing:.09em;padding:3px 9px;border-radius:3px">'+p.category+'</span></div>'+
+    '<div class="art-title">'+p.title+'</div>'+
+    '<div class="art-exc">'+p.excerpt+'</div>'+
+    '<div style="margin-bottom:10px">'+tags+'</div>'+
+    '<div class="art-footer">'+
+    '<div class="art-byline"><div class="art-av">BL</div><div><div class="art-by-name">Bhagya Lakshmi T</div><div class="art-by-date">'+fmtDate(p.publishDate)+'</div></div></div>'+
+    '<div class="art-right"><span class="art-read-badge">'+p.readTime+' min</span><span class="art-arrow">&rarr;</span></div>'+
+    '</div>'+
+    '</div>'+
+    '</a>';
+}
+
+function subNL(e){
+  e.preventDefault();
+  document.getElementById('nlOk').style.display='block';
+  document.getElementById('nlEmail').value='';
+  setTimeout(function(){document.getElementById('nlOk').style.display='none';},5000);
+}
+
+function toggleMob(){
+  document.getElementById('mobNav').classList.toggle('open');
+}
+
+init();
+</script>
+</body>
+</html>
