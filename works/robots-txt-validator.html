@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNL3R9YSHG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SNL3R9YSHG');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Robots.txt Validator | Works · Bhagya Lakshmi T</title>
+<meta name="description" content="Free Robots.txt Validator — paste your robots.txt and test URLs to instantly see Allowed/Blocked status, matching rules, and critical risk flags."/>
+<link rel="canonical" href="https://bhagya.engineer/works/robots-txt-validator.html"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='36' y2='36' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='10' fill='url(%23b)'/%3E%3Ctext x='7' y='27' font-family='Arial Black%2CArial%2Csans-serif' font-size='23' font-weight='900' fill='white'%3EB%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap"/></noscript>
+<style>
+:root{--p:#E11D48;--s:#0D9488;--a:#F59E0B;--pk:#8B5CF6;--g:#10B981;--bg:#0D0B1A;--text:#FFFFFF;--muted:#A0AEC0;--border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.06);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(13,11,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem}
+.nav-logo em{color:#FB923C;font-style:normal}
+.nav-back{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+.hero{padding:52px 24px 36px;text-align:center;max-width:700px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#93C5FD;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:5px 14px;border-radius:50px;margin-bottom:18px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;line-height:1.15;margin-bottom:10px}
+.hero h1 span{background:linear-gradient(135deg,#93C5FD,#6EE7B7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.92rem;max-width:500px;margin:0 auto}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px 64px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.card p{font-size:.78rem;color:var(--muted);margin-bottom:12px}
+textarea{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.78rem;resize:vertical;outline:none;transition:border-color .2s;line-height:1.8}
+textarea:focus{border-color:rgba(59,130,246,.4);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
+textarea::placeholder{color:#4a5568}
+#robotsInput{min-height:220px}
+#urlsInput{min-height:180px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn-go{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3B82F6,#0D9488);color:#fff;border:none;border-radius:10px;padding:12px 28px;font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .25s}
+.btn-go:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.4)}
+.btn-example{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:10px 16px;font-size:.82rem;cursor:pointer;transition:all .2s}
+.btn-example:hover{background:rgba(255,255,255,.08);color:var(--text)}
+/* Results */
+.results-section{display:none}
+.summary-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+.ss-card{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.ss-num{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:800;line-height:1}
+.ss-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+/* URL results table */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+thead th{background:rgba(255,255,255,.05);padding:10px 14px;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+tbody td{padding:10px 14px;vertical-align:middle}
+.td-url{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#93C5FD;word-break:break-all;max-width:280px}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:50px;white-space:nowrap}
+.sb-allowed{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6EE7B7}
+.sb-blocked{background:rgba(225,29,72,.15);border:1px solid rgba(225,29,72,.3);color:#FDA4AF}
+.sb-default{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#93C5FD}
+.rule-tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;background:rgba(255,255,255,.05);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--muted)}
+/* Risk flags */
+.risk-section{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px}
+.risk-title{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.risk-list{display:flex;flex-direction:column;gap:8px}
+.risk-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px}
+.risk-high{background:rgba(225,29,72,.08);border:1px solid rgba(225,29,72,.2)}
+.risk-med{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15)}
+.risk-low{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15)}
+.risk-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.risk-content{}
+.risk-msg{font-size:.82rem;font-weight:600;color:var(--text)}
+.risk-detail{font-size:.75rem;color:var(--muted);margin-top:2px}
+/* Parsed rules panel */
+.rules-panel{background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px}
+.rules-panel-title{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.rule-group{margin-bottom:12px}
+.rg-agent{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;color:#C4B5FD;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);padding:2px 8px;border-radius:4px;margin-bottom:6px;display:inline-block}
+.rg-rules{display:flex;flex-direction:column;gap:3px;margin-left:8px}
+.rg-rule{font-family:'JetBrains Mono',monospace;font-size:.72rem;display:flex;gap:8px;align-items:center}
+.rg-disallow{color:#FDA4AF}.rg-allow{color:#6EE7B7}.rg-sitemap{color:#FCD34D}
+/* Orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:.07}
+.o1{width:500px;height:500px;background:#3B82F6;top:-200px;right:-100px}
+.o2{width:400px;height:400px;background:var(--s);bottom:-100px;left:-80px}
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--muted);font-size:.8rem;position:relative;z-index:1}
+footer a{color:var(--p);text-decoration:none}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}.summary-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){nav{padding:12px 16px}.hero{padding:36px 16px 24px}.wrap{padding:0 16px 48px}.summary-strip{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<nav>
+  <a href="https://bhagya.engineer" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><defs><linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs><rect width="36" height="36" rx="10" fill="url(#lg)"/><text x="7" y="27" font-family="Arial Black,Arial,sans-serif" font-size="23" font-weight="900" fill="white">B</text></svg>
+    Bhagya <em>Lakshmi</em>
+  </a>
+  <a href="/works/" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    All Tools
+  </a>
+  <a href="/blog/" class="nav-back" style="margin-left:8px">Blog</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">🤖 Robots.txt Validator</div>
+  <h1>Robots.txt <span>Validator</span></h1>
+  <p>Paste your robots.txt and up to 10 test URLs — instantly see Allowed / Blocked status, the exact matching rule, and critical risk flags.</p>
+</div>
+
+<div class="wrap">
+  <div class="two-col">
+    <div class="card">
+      <h2>🤖 Robots.txt Content</h2>
+      <p>Paste the full content of your robots.txt file.</p>
+      <textarea id="robotsInput" placeholder="User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Allow: /public/
+Disallow: /*.pdf$
+Crawl-delay: 10
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml"></textarea>
+    </div>
+    <div class="card">
+      <h2>🔗 Test URLs</h2>
+      <p>One URL per line. Include the full path (no domain needed).</p>
+      <textarea id="urlsInput" placeholder="/admin/dashboard
+/blog/seo-tips
+/private/data.json
+/public/resource.html
+/assets/style.css
+/about-us"></textarea>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-bottom:24px">
+    <button class="btn-go" onclick="validateRobots()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+      Validate
+    </button>
+    <button class="btn-example" onclick="loadExample()">Load Example</button>
+  </div>
+
+  <div class="results-section" id="resultsSection">
+    <div class="summary-strip" id="summaryStrip"></div>
+    <div id="riskSection"></div>
+    <div class="table-wrap" id="tableWrap" style="display:none">
+      <table>
+        <thead><tr><th>#</th><th>URL Path</th><th>Status</th><th>User-Agent</th><th>Matching Rule</th></tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div class="rules-panel" id="rulesPanel" style="display:none">
+      <div class="rules-panel-title">📋 Parsed Robots.txt Rules</div>
+      <div id="rulesList"></div>
+    </div>
+  </div>
+</div>
+
+<footer>Built by <a href="https://bhagya.engineer">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;·&nbsp; <a href="/works/">← All Tools</a> &nbsp;·&nbsp; <a href="/blog/">Blog</a></footer>
+
+<script>
+// Parse robots.txt into groups per User-agent
+function parseRobots(txt){
+  const lines = txt.split('\n').map(l=>l.replace(/#.*$/,'').trim()).filter(l=>l.length>0);
+  const groups = [];
+  let current = null;
+  lines.forEach(line=>{
+    const m = line.match(/^([A-Za-z-]+)\s*:\s*(.*)$/i);
+    if(!m) return;
+    const [,key,val] = m;
+    const kl = key.toLowerCase();
+    if(kl==='user-agent'){
+      if(!current || current.rules.length>0){
+        current = {agents:[val.trim()], allow:[], disallow:[], crawlDelay:null, sitemap:[]};
+        groups.push(current);
+      } else {
+        current.agents.push(val.trim());
+      }
+    } else if(kl==='disallow' && current){
+      if(val.trim()) current.disallow.push(val.trim());
+    } else if(kl==='allow' && current){
+      if(val.trim()) current.allow.push(val.trim());
+    } else if(kl==='crawl-delay' && current){
+      current.crawlDelay = val.trim();
+    } else if(kl==='sitemap'){
+      if(current) current.sitemap.push(val.trim());
+    }
+  });
+  return groups;
+}
+
+// Check if a path matches a robots.txt pattern (supports * and $)
+function matchesPattern(path, pattern){
+  // Escape regex special chars except * and $
+  let regex = pattern.replace(/[.+?^{}()|[\]\\]/g,'\\$&').replace(/\*/g,'.*');
+  if(regex.endsWith('$')) regex = regex + '$';
+  try{ return new RegExp(regex).test(path); } catch(e){ return path.startsWith(pattern.replace(/[*$]/g,'')); }
+}
+
+// For a given path and group, return the most specific rule result
+function checkGroup(path, group){
+  const matches = [];
+  group.allow.forEach(r=>{ if(matchesPattern(path,r)) matches.push({type:'allow',rule:'Allow: '+r,len:r.length}); });
+  group.disallow.forEach(r=>{ if(matchesPattern(path,r)) matches.push({type:'disallow',rule:'Disallow: '+r,len:r.length}); });
+  if(!matches.length) return {result:'allow',rule:'Default (no matching rule)',agent:group.agents.join(', ')};
+  matches.sort((a,b)=>b.len-a.len);
+  const winner = matches[0];
+  return {result:winner.type,rule:winner.rule,agent:group.agents.join(', ')};
+}
+
+function getApplicableGroup(path, groups, targetAgent='Googlebot'){
+  const specific = groups.find(g=>g.agents.some(a=>a.toLowerCase()===targetAgent.toLowerCase()));
+  if(specific){ const r=checkGroup(path,specific); if(r.rule!=='Default (no matching rule)') return r; }
+  const wildcard = groups.find(g=>g.agents.includes('*'));
+  if(wildcard) return checkGroup(path,wildcard);
+  return {result:'allow',rule:'Default (no robots.txt rule)',agent:'*'};
+}
+
+function validateRobots(){
+  const robotsTxt = document.getElementById('robotsInput').value.trim();
+  const urlsRaw = document.getElementById('urlsInput').value.trim();
+  if(!robotsTxt){ alert('Please paste your robots.txt content.'); return; }
+  if(!urlsRaw){ alert('Please enter at least one test URL.'); return; }
+  const groups = parseRobots(robotsTxt);
+  const paths = urlsRaw.split('\n').map(u=>{
+    u = u.trim();
+    try{ const url=new URL(u.startsWith('http')?u:'http://x.com'+u); return url.pathname+(url.search||''); } catch(e){ return u.startsWith('/')?u:'/'+u; }
+  }).filter(u=>u.length>0).slice(0,10);
+  const results = paths.map(path=>{
+    return {path, ...getApplicableGroup(path, groups)};
+  });
+  const allowed = results.filter(r=>r.result==='allow').length;
+  const blocked = results.filter(r=>r.result==='disallow').length;
+  const sitemaps = groups.flatMap(g=>g.sitemap);
+  document.getElementById('summaryStrip').innerHTML = `
+    <div class="ss-card"><div class="ss-num" style="color:#93C5FD">${paths.length}</div><div class="ss-lbl">URLs Tested</div></div>
+    <div class="ss-card"><div class="ss-num" style="color:var(--g)">${allowed}</div><div class="ss-lbl">Allowed</div></div>
+    <div class="ss-card"><div class="ss-num" style="color:var(--p)">${blocked}</div><div class="ss-lbl">Blocked</div></div>
+    <div class="ss-card"><div class="ss-num" style="color:#FCD34D">${groups.length}</div><div class="ss-lbl">Rule Groups</div></div>
+    <div class="ss-card"><div class="ss-num" style="color:${sitemaps.length?'#6EE7B7':'var(--p)'}">${sitemaps.length?'✅':'❌'}</div><div class="ss-lbl">Sitemap Listed</div></div>`;
+  const risks = [];
+  const allDisallow = groups.flatMap(g=>g.disallow.map(r=>({agent:g.agents.join(', '),rule:r})));
+  if(allDisallow.find(r=>r.rule==='/')){risks.push({level:'high',icon:'🚨',msg:'Disallow: / blocks ALL crawlers',detail:'One or more user-agent groups have Disallow: / — this will block all search engine access.'});}
+  const cssJs = allDisallow.find(r=>r.rule.includes('.css')||r.rule.includes('.js'));
+  if(cssJs) risks.push({level:'high',icon:'⚠️',msg:'CSS/JS files may be blocked',detail:`Rule "${cssJs.rule}" may prevent Google from rendering JavaScript or styling. This can hurt rankings.`});
+  if(!sitemaps.length) risks.push({level:'med',icon:'🗺️',msg:'No Sitemap directive found',detail:'Adding a Sitemap: line helps search engines discover all your pages faster.'});
+  const googlebot = groups.find(g=>g.agents.some(a=>a.toLowerCase()==='googlebot'));
+  if(!googlebot) risks.push({level:'low',icon:'ℹ️',msg:'No Googlebot-specific rules',detail:'No dedicated Googlebot block found. Rules from User-agent: * will apply to Googlebot.'});
+  const crawlDelays = groups.filter(g=>g.crawlDelay).map(g=>`${g.agents.join(', ')}: ${g.crawlDelay}s`);
+  if(crawlDelays.length) risks.push({level:'med',icon:'🐢',msg:`Crawl-delay set (${crawlDelays.join(', ')})`,detail:'Crawl-delay slows down indexing. Only use if your server struggles under crawler load.'});
+  if(!risks.length) risks.push({level:'low',icon:'✅',msg:'No critical issues detected',detail:'Your robots.txt looks clean. No immediate SEO risks found.'});
+  const riskLevelClass = {high:'risk-high',med:'risk-med',low:'risk-low'};
+  document.getElementById('riskSection').innerHTML = `
+    <div class="risk-section">
+      <div class="risk-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Risk Flags</div>
+      <div class="risk-list">${risks.map(r=>`<div class="risk-item ${riskLevelClass[r.level]}"><span class="risk-icon">${r.icon}</span><div class="risk-content"><div class="risk-msg">${esc(r.msg)}</div><div class="risk-detail">${esc(r.detail)}</div></div></div>`).join('')}</div>
+    </div>`;
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  results.forEach((r,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-size:.72rem;text-align:center">${i+1}</td>
+      <td class="td-url">${esc(r.path)}</td>
+      <td><span class="status-badge ${r.result==='allow'?'sb-allowed':r.result==='disallow'?'sb-blocked':'sb-default'}">${r.result==='allow'?'✅ Allowed':r.result==='disallow'?'🚫 Blocked':'ℹ️ Default Allow'}</span></td>
+      <td><span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#C4B5FD">${esc(r.agent)}</span></td>
+      <td><span class="rule-tag">${esc(r.rule)}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('tableWrap').style.display='block';
+  const rulesList = document.getElementById('rulesList');
+  rulesList.innerHTML = groups.map(g=>`
+    <div class="rule-group">
+      <span class="rg-agent">User-agent: ${esc(g.agents.join(', '))}</span>
+      <div class="rg-rules">
+        ${g.allow.map(r=>`<div class="rg-rule"><span class="rg-allow">Allow:</span> <span style="color:#E2E8F0">${esc(r)}</span></div>`).join('')}
+        ${g.disallow.map(r=>`<div class="rg-rule"><span class="rg-disallow">Disallow:</span> <span style="color:#E2E8F0">${esc(r)}</span></div>`).join('')}
+        ${g.crawlDelay?`<div class="rg-rule"><span style="color:#A78BFA">Crawl-delay:</span> <span style="color:#E2E8F0">${esc(g.crawlDelay)}</span></div>`:''}
+        ${g.sitemap.map(s=>`<div class="rg-rule"><span class="rg-sitemap">Sitemap:</span> <span style="color:#E2E8F0">${esc(s)}</span></div>`).join('')}
+      </div>
+    </div>`).join('');
+  document.getElementById('rulesPanel').style.display='block';
+  document.getElementById('resultsSection').style.display='block';
+  document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function loadExample(){
+  document.getElementById('robotsInput').value = `User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /login
+Allow: /public/
+Crawl-delay: 5
+
+User-agent: Googlebot
+Allow: /
+Disallow: /search?
+
+User-agent: Bingbot
+Disallow: /
+
+Sitemap: https://bankbazaar.com/sitemap.xml`;
+  document.getElementById('urlsInput').value = `/admin/dashboard
+/blog/seo-guide
+/private/data.json
+/public/resource
+/login
+/search?q=credit+card
+/credit-card.html
+/assets/main.css`;
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+</script>
+</body>
+</html>

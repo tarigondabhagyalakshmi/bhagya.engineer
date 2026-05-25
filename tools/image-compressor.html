@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Image Compressor — Free Online Tool | bhagya.engineer</title>
+<meta name="description" content="Free online image compressor. Compress JPG, PNG, WebP images instantly in your browser. No upload to server. Supports batch compression."/>
+<link rel="canonical" href="https://bhagya.engineer/tools/image-compressor"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='36' y2='36' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='10' fill='url(%23b)'/%3E%3Ctext x='7' y='27' font-family='Arial Black%2CArial%2Csans-serif' font-size='23' font-weight='900' fill='white'%3EB%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #7C3AED;
+    --purple-dark: #5B21B6;
+    --purple-light: #EDE9FE;
+    --rose: #E11D48;
+    --rose-light: #FFF1F2;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-400: #9CA3AF;
+    --gray-600: #4B5563;
+    --gray-800: #1F2937;
+    --green: #059669;
+    --green-light: #ECFDF5;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--gray-800);
+  }
+  .nav-logo svg { flex-shrink: 0; }
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .nav-back:hover { background: var(--gray-100); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #7C3AED 100%);
+    padding: 56px 24px 48px;
+    text-align: center;
+    color: #fff;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 17px;
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── DROP ZONE ── */
+  .dropzone {
+    background: #fff;
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius);
+    padding: 56px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .dropzone:hover, .dropzone.drag-over {
+    border-color: var(--purple);
+    background: var(--purple-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .dropzone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+  .drop-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--purple-light), #DDD6FE);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .drop-icon svg { color: var(--purple); }
+  .dropzone h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+  }
+  .dropzone p {
+    color: var(--gray-400);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .btn-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--purple), #6D28D9);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+    pointer-events: none;
+  }
+  .dropzone:hover .btn-upload {
+    box-shadow: 0 6px 20px rgba(124,58,237,0.45);
+    transform: translateY(-1px);
+  }
+  .drop-formats {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+
+  /* ── CONTROLS ── */
+  .controls-bar {
+    display: none;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-top: 24px;
+    box-shadow: var(--shadow);
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .controls-bar.visible { display: flex; }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .control-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .quality-badge {
+    background: var(--purple-light);
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 100px;
+  }
+  input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: var(--gray-200);
+    border-radius: 100px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--purple);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.4);
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--purple);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.4);
+    cursor: pointer;
+  }
+
+  .format-select {
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-800);
+    outline: none;
+    cursor: pointer;
+    transition: border 0.2s;
+    width: 100%;
+  }
+  .format-select:focus { border-color: var(--purple); }
+
+  .btn-compress-all {
+    background: linear-gradient(135deg, var(--rose), #BE123C);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(225,29,72,0.35);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-compress-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225,29,72,0.45);
+  }
+  .btn-compress-all:active { transform: translateY(0); }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .img-card {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .img-card:hover { box-shadow: var(--shadow-lg); }
+
+  .card-preview {
+    position: relative;
+    background: #f0f0f0;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .card-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .badge-pending { background: var(--gray-100); color: var(--gray-600); }
+  .badge-processing {
+    background: #FEF3C7;
+    color: #92400E;
+    animation: pulse 1.2s infinite;
+  }
+  .badge-done { background: var(--green-light); color: var(--green); }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .card-body { padding: 16px; }
+  .card-filename {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--gray-800);
+    margin-bottom: 12px;
+  }
+
+  .size-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .size-label { font-size: 12px; color: var(--gray-400); font-weight: 500; }
+  .size-val { font-size: 14px; font-weight: 700; color: var(--gray-800); }
+  .size-val.saved { color: var(--green); }
+
+  .savings-bar-wrap {
+    background: var(--gray-100);
+    border-radius: 100px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .savings-bar {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--purple), var(--rose));
+    transition: width 0.6s ease;
+    width: 0%;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-download {
+    flex: 1;
+    background: linear-gradient(135deg, var(--purple), #6D28D9);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .btn-download.ready {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .btn-download.ready:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124,58,237,0.35);
+  }
+  .btn-remove {
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+  .btn-remove:hover { background: var(--rose-light); color: var(--rose); }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    display: none;
+    background: linear-gradient(135deg, var(--green-light), #D1FAE5);
+    border: 1.5px solid #6EE7B7;
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    margin-top: 24px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .summary-bar.visible { display: flex; }
+  .summary-stat { text-align: center; }
+  .summary-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+  }
+  .summary-lbl { font-size: 12px; color: var(--gray-600); font-weight: 500; margin-top: 4px; }
+  .btn-dl-all {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-dl-all:hover { background: #047857; transform: translateY(-1px); }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {
+    margin-top: 64px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gray-800);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .step-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--purple), #6D28D9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 0 auto 14px;
+  }
+  .step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .step-card p { font-size: 13px; color: var(--gray-400); line-height: 1.5; }
+
+  /* ── FOOTER NOTE ── */
+  .privacy-note {
+    background: var(--purple-light);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--purple-dark);
+  }
+  .privacy-note svg { flex-shrink: 0; margin-top: 1px; }
+
+  .site-footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--gray-400);
+    font-size: 13px;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+  }
+  .site-footer a { color: var(--purple); text-decoration: none; font-weight: 600; }
+
+  /* ── LOADING SPINNER ── */
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--gray-200);
+    border-top-color: var(--purple);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media(max-width:600px) {
+    .hero { padding: 40px 16px 36px; }
+    .controls-bar { padding: 16px; }
+    .summary-bar { flex-direction: column; text-align: center; }
+    .btn-dl-all { width: 100%; justify-content: center; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://bhagya.engineer/" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#7C3AED"/>
+          <stop offset="1" stop-color="#4F46E5"/>
+        </linearGradient>
+      </defs>
+      <rect width="36" height="36" rx="10" fill="url(#lg)"/>
+      <text x="7" y="27" font-family="Arial Black,Arial,sans-serif" font-size="23" font-weight="900" fill="white">B</text>
+    </svg>
+    bhagya.engineer
+  </a>
+  <a href="https://bhagya.engineer/" class="nav-back">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to site
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Free Tool · No Sign-up
+  </div>
+  <h1>Image Compressor</h1>
+  <p>Compress JPG, PNG &amp; WebP images instantly in your browser. No uploads, no servers — your images never leave your device.</p>
+  <div class="hero-pills">
+    <span class="pill">🔒 100% Private</span>
+    <span class="pill">⚡ Instant</span>
+    <span class="pill">📦 Batch Support</span>
+    <span class="pill">🎨 JPG · PNG · WebP</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- DROP ZONE -->
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/gif" multiple/>
+    <div class="drop-icon">
+      <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" color="#7C3AED">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+      </svg>
+    </div>
+    <h2>Drop images here or click to browse</h2>
+    <p>Supports JPG, PNG, WebP · Multiple files at once</p>
+    <div class="btn-upload">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+      Choose Images
+    </div>
+    <p class="drop-formats">Max 50 images · Max 50 MB per image</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls-bar" id="controlsBar">
+    <div class="control-group" style="flex:2;min-width:240px">
+      <div class="control-label">
+        Compression Quality
+        <span class="quality-badge" id="qualityLabel">80%</span>
+      </div>
+      <input type="range" id="qualitySlider" min="10" max="100" value="80"/>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-400)">
+        <span>Smaller file</span>
+        <span>Better quality</span>
+      </div>
+    </div>
+
+    <div class="control-group" style="max-width:160px">
+      <div class="control-label">Output Format</div>
+      <select class="format-select" id="formatSelect">
+        <option value="auto">Auto (keep original)</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/png">PNG</option>
+        <option value="image/webp">WebP</option>
+      </select>
+    </div>
+
+    <div class="control-group" style="max-width:180px">
+      <div class="control-label">Max Width (px)</div>
+      <select class="format-select" id="resizeSelect">
+        <option value="0">No resize</option>
+        <option value="1920">1920px (Full HD)</option>
+        <option value="1280">1280px (HD)</option>
+        <option value="800">800px (Web)</option>
+        <option value="400">400px (Thumbnail)</option>
+      </select>
+    </div>
+
+    <button class="btn-compress-all" id="compressAll" onclick="compressAll()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Compress All
+    </button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-bar" id="summaryBar">
+    <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center">
+      <div class="summary-stat">
+        <div class="summary-num" id="sumFiles">0</div>
+        <div class="summary-lbl">Files Compressed</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-num" id="sumOriginal">0 KB</div>
+        <div class="summary-lbl">Original Size</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-num" id="sumCompressed">0 KB</div>
+        <div class="summary-lbl">Compressed Size</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-num" id="sumSaved">0%</div>
+        <div class="summary-lbl">Space Saved</div>
+      </div>
+    </div>
+    <button class="btn-dl-all" onclick="downloadAll()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download All
+    </button>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-grid" id="cardsGrid"></div>
+
+  <!-- PRIVACY NOTE -->
+  <div class="privacy-note" id="privacyNote" style="display:none">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div><strong>100% Private.</strong> All compression happens locally in your browser using the Canvas API. Your images are never uploaded to any server.</div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section" id="howSection">
+    <p class="section-title">How it works</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Upload Images</h3>
+        <p>Drag & drop or browse to select JPG, PNG, or WebP files. Multiple files supported.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Set Quality</h3>
+        <p>Adjust the quality slider and choose your output format. 80% is a great starting point.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Compress</h3>
+        <p>Hit "Compress All" and the tool processes everything instantly in your browser.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Download</h3>
+        <p>Download individual images or click "Download All" to get them in one go.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  A free tool by <a href="https://bhagya.engineer/">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;|&nbsp;
+  <a href="https://bhagya.engineer/">Back to portfolio</a>
+</footer>
+
+<script>
+  // ── STATE ──
+  const files = []; // { file, id, origURL, compBlob, compURL }
+  let idCounter = 0;
+
+  // ── DOM ──
+  const dropzone      = document.getElementById('dropzone');
+  const fileInput     = document.getElementById('fileInput');
+  const controlsBar   = document.getElementById('controlsBar');
+  const cardsGrid     = document.getElementById('cardsGrid');
+  const summaryBar    = document.getElementById('summaryBar');
+  const privacyNote   = document.getElementById('privacyNote');
+  const howSection    = document.getElementById('howSection');
+  const qualitySlider = document.getElementById('qualitySlider');
+  const qualityLabel  = document.getElementById('qualityLabel');
+  const formatSelect  = document.getElementById('formatSelect');
+  const resizeSelect  = document.getElementById('resizeSelect');
+
+  // Quality label sync
+  qualitySlider.addEventListener('input', () => {
+    qualityLabel.textContent = qualitySlider.value + '%';
+  });
+
+  // ── DRAG & DROP ──
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropzone.classList.remove('drag-over');
+    handleFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+  });
+  fileInput.addEventListener('change', () => {
+    handleFiles(Array.from(fileInput.files));
+    fileInput.value = '';
+  });
+
+  // ── FILE HANDLING ──
+  function handleFiles(newFiles) {
+    if (!newFiles.length) return;
+    newFiles.forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const id = ++idCounter;
+      const origURL = URL.createObjectURL(file);
+      files.push({ file, id, origURL, compBlob: null, compURL: null });
+      renderCard({ file, id, origURL, compBlob: null, compURL: null });
+    });
+    controlsBar.classList.add('visible');
+    privacyNote.style.display = 'flex';
+    howSection.style.display = 'none';
+  }
+
+  // ── RENDER CARD ──
+  function renderCard(item) {
+    const card = document.createElement('div');
+    card.className = 'img-card';
+    card.id = 'card-' + item.id;
+    card.innerHTML = `
+      <div class="card-preview">
+        <img src="${item.origURL}" alt="${item.file.name}" loading="lazy"/>
+        <span class="card-status-badge badge-pending" id="badge-${item.id}">Pending</span>
+      </div>
+      <div class="card-body">
+        <div class="card-filename" title="${item.file.name}">${item.file.name}</div>
+        <div class="size-row">
+          <span class="size-label">Original</span>
+          <span class="size-val">${fmtSize(item.file.size)}</span>
+        </div>
+        <div class="size-row">
+          <span class="size-label">Compressed</span>
+          <span class="size-val saved" id="comp-size-${item.id}">—</span>
+        </div>
+        <div class="size-row">
+          <span class="size-label">Saved</span>
+          <span class="size-val saved" id="saved-pct-${item.id}">—</span>
+        </div>
+        <div class="savings-bar-wrap">
+          <div class="savings-bar" id="bar-${item.id}"></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-download" id="dl-${item.id}" onclick="downloadOne(${item.id})">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download
+          </button>
+          <button class="btn-remove" title="Remove" onclick="removeCard(${item.id})">✕</button>
+        </div>
+      </div>`;
+    cardsGrid.appendChild(card);
+  }
+
+  // ── COMPRESS ALL ──
+  async function compressAll() {
+    const quality = parseInt(qualitySlider.value) / 100;
+    const format = formatSelect.value;
+    const maxW = parseInt(resizeSelect.value);
+
+    for (const item of files) {
+      if (!item.compBlob || true) { // always re-compress with new settings
+        setBadge(item.id, 'processing', 'Compressing…');
+        await new Promise(r => setTimeout(r, 10)); // yield to repaint
+        const result = await compressImage(item.file, quality, format, maxW);
+        item.compBlob = result.blob;
+        item.compURL = URL.createObjectURL(result.blob);
+        updateCardResult(item, result);
+      }
+    }
+    updateSummary();
+  }
+
+  // ── COMPRESS ONE IMAGE ──
+  function compressImage(file, quality, format, maxW) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (maxW && w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const outFormat = format === 'auto' ? (file.type === 'image/png' ? 'image/png' : 'image/jpeg') : format;
+        canvas.toBlob(blob => resolve({ blob, format: outFormat }), outFormat, quality);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  // ── UPDATE CARD AFTER COMPRESS ──
+  function updateCardResult(item, result) {
+    const saving = Math.round((1 - item.compBlob.size / item.file.size) * 100);
+    const safeSaving = Math.max(0, saving);
+
+    document.getElementById('comp-size-' + item.id).textContent = fmtSize(item.compBlob.size);
+    document.getElementById('saved-pct-' + item.id).textContent = safeSaving + '% smaller';
+    document.getElementById('bar-' + item.id).style.width = safeSaving + '%';
+
+    // update preview
+    const img = document.querySelector('#card-' + item.id + ' .card-preview img');
+    if (img) img.src = item.compURL;
+
+    // enable download
+    const dlBtn = document.getElementById('dl-' + item.id);
+    dlBtn.classList.add('ready');
+
+    setBadge(item.id, 'done', saving > 0 ? `−${safeSaving}%` : 'Done');
+  }
+
+  // ── SUMMARY ──
+  function updateSummary() {
+    const done = files.filter(f => f.compBlob);
+    if (!done.length) return;
+    const origTotal = done.reduce((a, f) => a + f.file.size, 0);
+    const compTotal = done.reduce((a, f) => a + f.compBlob.size, 0);
+    const saved = Math.round((1 - compTotal / origTotal) * 100);
+    document.getElementById('sumFiles').textContent = done.length;
+    document.getElementById('sumOriginal').textContent = fmtSize(origTotal);
+    document.getElementById('sumCompressed').textContent = fmtSize(compTotal);
+    document.getElementById('sumSaved').textContent = Math.max(0, saved) + '%';
+    summaryBar.classList.add('visible');
+  }
+
+  // ── DOWNLOAD ONE ──
+  function downloadOne(id) {
+    const item = files.find(f => f.id === id);
+    if (!item || !item.compBlob) return;
+    const ext = item.compBlob.type === 'image/png' ? 'png' : item.compBlob.type === 'image/webp' ? 'webp' : 'jpg';
+    const baseName = item.file.name.replace(/\.[^.]+$/, '');
+    triggerDownload(item.compURL, baseName + '-compressed.' + ext);
+  }
+
+  // ── DOWNLOAD ALL ──
+  async function downloadAll() {
+    const done = files.filter(f => f.compBlob);
+    if (!done.length) return;
+    if (done.length === 1) { downloadOne(done[0].id); return; }
+    // zip via JSZip CDN if available, else sequential download
+    if (typeof JSZip !== 'undefined') {
+      const zip = new JSZip();
+      done.forEach(item => {
+        const ext = item.compBlob.type === 'image/webp' ? 'webp' : item.compBlob.type === 'image/png' ? 'png' : 'jpg';
+        zip.file(item.file.name.replace(/\.[^.]+$/, '') + '-compressed.' + ext, item.compBlob);
+      });
+      const blob = await zip.generateAsync({ type: 'blob' });
+      triggerDownload(URL.createObjectURL(blob), 'compressed-images.zip');
+    } else {
+      // Fallback: download with small delay
+      for (let i = 0; i < done.length; i++) {
+        await new Promise(r => setTimeout(r, i * 300));
+        downloadOne(done[i].id);
+      }
+    }
+  }
+
+  // ── REMOVE CARD ──
+  function removeCard(id) {
+    const idx = files.findIndex(f => f.id === id);
+    if (idx !== -1) files.splice(idx, 1);
+    document.getElementById('card-' + id)?.remove();
+    if (!files.length) {
+      controlsBar.classList.remove('visible');
+      summaryBar.classList.remove('visible');
+      privacyNote.style.display = 'none';
+      howSection.style.display = '';
+    }
+    updateSummary();
+  }
+
+  // ── HELPERS ──
+  function setBadge(id, type, text) {
+    const b = document.getElementById('badge-' + id);
+    b.className = 'card-status-badge badge-' + type;
+    b.textContent = text;
+  }
+
+  function fmtSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function triggerDownload(url, name) {
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.click();
+  }
+
+  // Load JSZip for batch download
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+  document.head.appendChild(s);
+</script>
+</body>
+</html>

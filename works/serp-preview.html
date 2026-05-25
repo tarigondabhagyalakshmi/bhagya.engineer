@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNL3R9YSHG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SNL3R9YSHG');
+</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SERP Preview Tool | Works · Bhagya Lakshmi T</title>
+<meta name="description" content="Live Google SERP snippet previewer. See exactly how your title and meta description appear on desktop and mobile search results — with pixel-width truncation."/>
+<link rel="canonical" href="https://bhagya.engineer/works/serp-preview"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='36' y2='36' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='10' fill='url(%23b)'/%3E%3Ctext x='7' y='27' font-family='Arial Black%2CArial%2Csans-serif' font-size='23' font-weight='900' fill='white'%3EB%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap"/></noscript>
+<style>
+:root{
+  --p:#E11D48;--s:#0D9488;--a:#F59E0B;--pk:#8B5CF6;--g:#10B981;
+  --bg:#0D0B1A;--bg2:#131124;--text:#FFFFFF;--muted:#A0AEC0;
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.06);--r:12px;
+  --ok:#10B981;--warn:#F59E0B;--bad:#E11D48;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(13,11,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem}
+.nav-logo em{color:#FB923C;font-style:normal}
+.nav-back{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+
+.hero{padding:48px 24px 32px;text-align:center;max-width:640px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#93C5FD;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:5px 14px;border-radius:50px;margin-bottom:16px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.7rem,5vw,2.5rem);font-weight:800;line-height:1.15;margin-bottom:10px;word-break:break-word}
+.hero h1 span{background:linear-gradient(135deg,#93C5FD,#6EE7B7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.9rem;max-width:480px;margin:0 auto}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px 72px;display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:start}
+
+/* ── INPUT PANEL ── */
+.input-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:74px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+
+label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+input[type=text],textarea{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;resize:none}
+input[type=text]:focus,textarea:focus{border-color:rgba(59,130,246,.45);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
+textarea{min-height:80px;line-height:1.5}
+
+/* Meter row */
+.meter-row{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.meter-label{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:var(--muted)}
+.meter-label strong{font-weight:600}
+.meter-bar-bg{height:5px;background:rgba(255,255,255,.07);border-radius:50px;overflow:hidden}
+.meter-bar-fill{height:100%;border-radius:50px;transition:width .25s,background .25s}
+
+.status-pill{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:50px}
+.sp-ok{background:rgba(16,185,129,.15);color:#6EE7B7}
+.sp-warn{background:rgba(245,158,11,.15);color:#FCD34D}
+.sp-bad{background:rgba(225,29,72,.15);color:#FDA4AF}
+.sp-info{background:rgba(59,130,246,.15);color:#93C5FD}
+
+.hint{font-size:.72rem;color:#4a5568;margin-top:5px;line-height:1.4}
+
+/* Toggle row */
+.toggle-row{display:flex;align-items:center;gap:10px;margin-top:4px}
+.toggle-label{font-size:.82rem;color:var(--muted)}
+.toggle{position:relative;width:36px;height:20px;cursor:pointer}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-track{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:50px;transition:background .2s}
+.toggle input:checked ~ .toggle-track{background:var(--s)}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked ~ .toggle-thumb{transform:translateX(16px)}
+
+/* ── PREVIEW PANEL ── */
+.preview-panel{display:flex;flex-direction:column;gap:16px}
+
+.device-tabs{display:flex;gap:0;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;overflow:hidden;width:fit-content}
+.dtab{padding:8px 20px;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;border:none;background:transparent;display:flex;align-items:center;gap:6px}
+.dtab.active{background:rgba(59,130,246,.15);color:#93C5FD}
+
+.preview-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+
+/* Google chrome bar */
+.chrome-bar{background:#f1f3f4;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #dadce0}
+.chrome-dots{display:flex;gap:5px}
+.chrome-dot{width:11px;height:11px;border-radius:50%}
+.chrome-addr{flex:1;background:#fff;border:1px solid #dadce0;border-radius:20px;padding:5px 14px;font-size:.75rem;color:#5f6368;font-family:Arial,sans-serif;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:320px}
+.chrome-addr.mobile-addr{max-width:200px}
+
+/* Google search UI */
+.google-page{background:#fff;padding:20px 20px 24px;font-family:Arial,sans-serif}
+.google-search-bar{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.g-logo{font-size:22px;font-weight:900;letter-spacing:-1px}
+.g-logo span:nth-child(1){color:#4285F4}
+.g-logo span:nth-child(2){color:#EA4335}
+.g-logo span:nth-child(3){color:#FBBC05}
+.g-logo span:nth-child(4){color:#4285F4}
+.g-logo span:nth-child(5){color:#34A853}
+.g-logo span:nth-child(6){color:#EA4335}
+.g-searchbox{flex:1;border:1px solid #dfe1e5;border-radius:24px;padding:8px 16px;font-size:14px;color:#202124;display:flex;align-items:center;gap:8px;box-shadow:0 1px 6px rgba(32,33,36,.1)}
+.g-search-icon{color:#9aa0a6;font-size:16px}
+
+.g-result-area{padding:0 4px}
+.g-result-info{font-size:12px;color:#70757a;margin-bottom:12px}
+
+/* Result card */
+.g-result{padding:0 0 20px;max-width:600px}
+.g-result.mobile-result{max-width:340px}
+
+.g-site-row{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.g-favicon{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700;flex-shrink:0}
+.g-breadcrumb{font-size:14px;color:#202124;line-height:1.3}
+.g-breadcrumb span{color:#5f6368;font-size:12px}
+
+.g-title{font-size:20px;color:#1a0dab;line-height:1.3;margin-bottom:4px;cursor:pointer;display:block;text-decoration:none;word-break:break-word}
+.g-title:hover{text-decoration:underline}
+.g-title.mobile-title{font-size:18px}
+.g-title .truncated-part{color:#c5c5c5;text-decoration:none}
+
+.g-desc{font-size:14px;color:#4d5156;line-height:1.58;word-break:break-word}
+.g-date{color:#70757a;font-size:14px}
+.g-desc .truncated-part{color:#c0c0c0}
+
+/* ── Phone frame ── */
+.phone-wrap{display:flex;justify-content:center;padding:20px 0 24px}
+.phone{position:relative;width:300px;background:linear-gradient(145deg,#2a2a2a,#1a1a1a);border-radius:46px;padding:12px;box-shadow:0 0 0 1px #444,0 0 0 2px #111,inset 0 0 0 1px #333,0 28px 80px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.5)}
+/* power button */
+.phone::after{content:'';position:absolute;right:-3px;top:110px;width:3px;height:56px;background:#333;border-radius:0 3px 3px 0;box-shadow:0 -44px 0 #333}
+/* volume buttons */
+.phone::before{content:'';position:absolute;left:-3px;top:88px;width:3px;height:32px;background:#333;border-radius:3px 0 0 3px;box-shadow:0 42px 0 #333,0 86px 0 #333}
+.phone-screen{background:#fff;border-radius:36px;overflow:hidden;position:relative}
+/* Dynamic island */
+.phone-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:108px;height:28px;background:#1a1a1a;border-radius:20px;z-index:10;display:flex;align-items:center;justify-content:center;gap:8px}
+.island-cam{width:10px;height:10px;background:#111;border-radius:50%;border:2px solid #333}
+.island-dot{width:6px;height:6px;background:#1d1d1d;border-radius:50%;border:1.5px solid #2a2a2a}
+/* Status bar */
+.phone-status{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 4px;background:#fff;font-family:system-ui,-apple-system,sans-serif}
+.status-time{font-size:13px;font-weight:700;color:#000;letter-spacing:-.3px}
+.status-icons{display:flex;align-items:center;gap:5px}
+.sig-bar{display:flex;align-items:flex-end;gap:1.5px;height:11px}
+.sig-bar span{background:#000;border-radius:1px;width:3px}
+.wifi-icon svg,.batt-icon svg{fill:#000}
+/* scroll area */
+.phone-content{overflow-y:auto;max-height:520px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.phone-content::-webkit-scrollbar{display:none}
+/* Home indicator */
+.phone-home{height:30px;background:#fff;display:flex;align-items:center;justify-content:center}
+.home-bar{width:120px;height:4px;background:#000;border-radius:2px;opacity:.2}
+
+/* Pixel width ruler */
+.ruler-wrap{margin-top:8px}
+.ruler-label{font-size:.68rem;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between}
+.ruler-outer{position:relative;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:visible}
+.ruler-limit{position:absolute;top:-3px;bottom:-3px;width:2px;background:rgba(255,255,255,.2);border-radius:1px}
+.ruler-fill{height:100%;border-radius:4px;transition:width .25s,background .25s}
+.ruler-limit-label{position:absolute;top:-16px;font-size:.58rem;color:#4a5568;transform:translateX(-50%)}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.info-card{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:8px;padding:12px}
+.info-card .val{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;line-height:1}
+.info-card .lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+
+/* Tips */
+.tips{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:var(--r);padding:16px}
+.tips h4{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:700;color:#93C5FD;margin-bottom:10px}
+.tip{display:flex;gap:8px;font-size:.77rem;color:var(--muted);margin-bottom:6px;line-height:1.45}
+.tip:last-child{margin-bottom:0}
+.tip-icon{flex-shrink:0;margin-top:1px}
+
+.orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;opacity:.055}
+.o1{width:500px;height:500px;background:#3B82F6;top:-150px;right:-100px}
+.o2{width:400px;height:400px;background:#0D9488;bottom:-100px;left:-80px}
+
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--muted);font-size:.8rem;position:relative;z-index:1}
+footer a{color:var(--p);text-decoration:none}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;position:static}
+  .input-panel{position:static}
+}
+@media(max-width:600px){
+  nav{padding:12px 16px}
+  .hero{padding:36px 16px 24px}
+  .wrap{padding:0 16px 48px}
+  .info-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SERP Preview Tool",
+  "description": "Pixel-accurate preview of how your page title and meta description appear in Google Search results — desktop and mobile views with real phone frame. No login required.",
+  "url": "https://bhagya.engineer/works/serp-preview.html",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Desktop SERP preview",
+    "Mobile phone frame preview",
+    "Pixel-width indicator",
+    "Real-time character count",
+    "CTR optimisation guidance"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Bhagya Lakshmi T",
+    "url": "https://bhagya.engineer"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Bhagya Lakshmi T",
+    "url": "https://bhagya.engineer"
+  },
+  "isAccessibleForFree": true,
+  "inLanguage": "en"
+}
+</script>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<nav>
+  <a href="https://bhagya.engineer" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><defs><linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs><rect width="36" height="36" rx="10" fill="url(#lg)"/><text x="7" y="27" font-family="Arial Black,Arial,sans-serif" font-size="23" font-weight="900" fill="white">B</text></svg>
+    Bhagya <em>Lakshmi</em>
+  </a>
+  <a href="https://bhagya.engineer/works/" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    All Tools
+  </a>
+  <a href="/blog/" class="nav-back" style="margin-left:8px">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    Blog
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="badge">🔍 SERP Preview</div>
+  <h1>Google <span>SERP Preview</span></h1>
+  <p>See exactly how your page appears in Google search — pixel-accurate truncation for desktop &amp; mobile, live as you type.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- ── INPUT PANEL ── -->
+  <div class="input-panel">
+
+    <!-- Page URL -->
+    <div class="card">
+      <div class="card-title">🔗 Page URL</div>
+      <label for="urlInput">Full URL</label>
+      <input type="text" id="urlInput" placeholder="https://www.bankbazaar.com/credit-card.html" oninput="update()"/>
+      <div class="hint">Used to build the breadcrumb path shown in results.</div>
+    </div>
+
+    <!-- Title -->
+    <div class="card">
+      <div class="card-title">📝 Page Title</div>
+      <label for="titleInput">Title tag content</label>
+      <input type="text" id="titleInput" placeholder="Best Credit Cards in India 2025 | BankBazaar" oninput="update()"/>
+      <div class="meter-row" id="titleMeter">
+        <div class="meter-label">
+          <span>Characters: <strong id="titleCharCount">0</strong></span>
+          <span id="titlePill" class="status-pill sp-info">—</span>
+        </div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill" id="titleCharBar" style="width:0%;background:#3B82F6"></div></div>
+        <div class="meter-label" style="margin-top:6px">
+          <span>Desktop pixel width: <strong id="titlePxD">0px</strong> / 580px</span>
+        </div>
+        <div class="ruler-outer"><div class="ruler-fill" id="titleBarD" style="width:0%"></div><div class="ruler-limit" style="left:100%"><span class="ruler-limit-label">580px</span></div></div>
+        <div class="meter-label" style="margin-top:4px">
+          <span>Mobile pixel width: <strong id="titlePxM">0px</strong> / 450px</span>
+        </div>
+        <div class="ruler-outer"><div class="ruler-fill" id="titleBarM" style="width:0%"></div><div class="ruler-limit" style="left:100%"><span class="ruler-limit-label">450px</span></div></div>
+      </div>
+    </div>
+
+    <!-- Meta Description -->
+    <div class="card">
+      <div class="card-title">📄 Meta Description</div>
+      <label for="descInput">Description tag content</label>
+      <textarea id="descInput" placeholder="Compare and apply for the best credit cards in India. Get reward points, cashback, travel benefits and more. 100% free service." oninput="update()"></textarea>
+      <div class="meter-row">
+        <div class="meter-label">
+          <span>Characters: <strong id="descCharCount">0</strong></span>
+          <span id="descPill" class="status-pill sp-info">—</span>
+        </div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill" id="descCharBar" style="width:0%;background:#3B82F6"></div></div>
+        <div class="meter-label" style="margin-top:6px">
+          <span>Desktop pixel width: <strong id="descPxD">0px</strong> / 920px</span>
+        </div>
+        <div class="ruler-outer"><div class="ruler-fill" id="descBarD" style="width:0%"></div><div class="ruler-limit" style="left:100%"><span class="ruler-limit-label">920px</span></div></div>
+        <div class="meter-label" style="margin-top:4px">
+          <span>Mobile pixel width: <strong id="descPxM">0px</strong> / 680px</span>
+        </div>
+        <div class="ruler-outer"><div class="ruler-fill" id="descBarM" style="width:0%"></div><div class="ruler-limit" style="left:100%"><span class="ruler-limit-label">680px</span></div></div>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="card">
+      <div class="card-title">⚙️ Options</div>
+      <div class="toggle-row">
+        <label class="toggle"><input type="checkbox" id="showDate" onchange="update()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <span class="toggle-label">Show date in snippet</span>
+      </div>
+      <div class="toggle-row" style="margin-top:10px">
+        <label class="toggle"><input type="checkbox" id="showSitelinks" onchange="update()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <span class="toggle-label">Show sitelinks</span>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <h4>💡 Optimisation Tips</h4>
+      <div class="tip"><span class="tip-icon">📏</span><span>Google truncates by <strong style="color:#fff">pixel width</strong>, not character count. A 55-char title in bold can still be cut.</span></div>
+      <div class="tip"><span class="tip-icon">🎯</span><span>Put the primary keyword near the <strong style="color:#fff">start</strong> of the title — it stays visible even when truncated.</span></div>
+      <div class="tip"><span class="tip-icon">📱</span><span>Mobile viewport is narrower — always check the mobile tab if you target phone users.</span></div>
+      <div class="tip"><span class="tip-icon">✂️</span><span>Google may rewrite your title if it's too short, keyword-stuffed, or doesn't match the page content.</span></div>
+      <div class="tip"><span class="tip-icon">📝</span><span>Descriptions have no direct ranking impact but a well-written one improves <strong style="color:#fff">CTR</strong>.</span></div>
+    </div>
+
+  </div>
+
+  <!-- ── PREVIEW PANEL ── -->
+  <div class="preview-panel">
+
+    <!-- Info grid -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="val" id="infoTitleStatus" style="color:#3B82F6">—</div>
+        <div class="lbl">Title status</div>
+      </div>
+      <div class="info-card">
+        <div class="val" id="infoDescStatus" style="color:#3B82F6">—</div>
+        <div class="lbl">Desc status</div>
+      </div>
+      <div class="info-card">
+        <div class="val" id="infoTitlePx" style="color:#A0AEC0">0px</div>
+        <div class="lbl">Title px (desktop)</div>
+      </div>
+      <div class="info-card">
+        <div class="val" id="infoDescPx" style="color:#A0AEC0">0px</div>
+        <div class="lbl">Desc px (desktop)</div>
+      </div>
+    </div>
+
+    <!-- Device toggle -->
+    <div class="device-tabs">
+      <button class="dtab active" id="tabDesktop" onclick="setDevice('desktop')">🖥️ Desktop</button>
+      <button class="dtab" id="tabMobile" onclick="setDevice('mobile')">📱 Mobile</button>
+    </div>
+
+    <!-- Desktop Preview -->
+    <div id="previewDesktop" class="preview-card">
+      <div class="chrome-bar">
+        <div class="chrome-dots">
+          <div class="chrome-dot" style="background:#FF5F57"></div>
+          <div class="chrome-dot" style="background:#FEBC2E"></div>
+          <div class="chrome-dot" style="background:#28C840"></div>
+        </div>
+        <div class="chrome-addr" id="chromeAddrD">google.com/search?q=</div>
+      </div>
+      <div class="google-page">
+        <div class="google-search-bar">
+          <div class="g-logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+          <div class="g-searchbox"><span class="g-search-icon">🔍</span><span id="gSearchTermD" style="color:#202124;font-size:14px"></span></div>
+        </div>
+        <div class="g-result-area">
+          <div class="g-result-info">About 1,24,00,000 results (0.42 seconds)</div>
+          <div class="g-result" id="resultDesktop">
+            <div class="g-site-row">
+              <div class="g-favicon" id="faviconD">B</div>
+              <div class="g-breadcrumb" id="breadcrumbD">bankbazaar.com</div>
+            </div>
+            <a class="g-title" id="gTitleD" href="#">Page Title</a>
+            <div class="g-desc"><span id="gDateD" class="g-date" style="display:none"></span><span id="gDescD"></span></div>
+          </div>
+          <!-- Sitelinks desktop -->
+          <div id="sitelinksD" style="display:none;margin-top:4px;padding:8px 0 0 26px;display:none">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px">
+              <a href="#" style="color:#1a0dab;font-size:14px;text-decoration:none" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Credit Cards</a>
+              <a href="#" style="color:#1a0dab;font-size:14px;text-decoration:none" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Personal Loans</a>
+              <a href="#" style="color:#1a0dab;font-size:14px;text-decoration:none" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Home Loans</a>
+              <a href="#" style="color:#1a0dab;font-size:14px;text-decoration:none" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Car Loans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Preview — real phone frame -->
+    <div id="previewMobile" style="display:none">
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-screen">
+
+            <!-- Dynamic Island -->
+            <div class="phone-island">
+              <div class="island-dot"></div>
+              <div class="island-cam"></div>
+            </div>
+
+            <!-- Status bar -->
+            <div class="phone-status" style="padding-top:44px">
+              <span class="status-time">9:41</span>
+              <div class="status-icons">
+                <!-- Signal -->
+                <div class="sig-bar">
+                  <span style="height:3px"></span>
+                  <span style="height:5px"></span>
+                  <span style="height:7px"></span>
+                  <span style="height:9px"></span>
+                </div>
+                <!-- WiFi -->
+                <svg width="15" height="11" viewBox="0 0 24 18" fill="none">
+                  <path d="M12 14.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="#000"/>
+                  <path d="M7.5 11.5C8.9 10.2 10.4 9.5 12 9.5s3.1.7 4.5 2" stroke="#000" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <path d="M4 8C6.5 5.6 9.1 4.5 12 4.5s5.5 1.1 8 3.5" stroke="#000" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <path d="M1 4.5C4.5 1.5 8 0 12 0s7.5 1.5 11 4.5" stroke="#000" stroke-width="2" stroke-linecap="round" fill="none"/>
+                </svg>
+                <!-- Battery -->
+                <svg width="22" height="11" viewBox="0 0 25 12">
+                  <rect x="0" y="1" width="21" height="10" rx="2.5" stroke="#000" stroke-width="1.2" fill="none"/>
+                  <rect x="21.5" y="3.5" width="2.5" height="5" rx="1.2" fill="#000" opacity=".4"/>
+                  <rect x="1.5" y="2.5" width="16" height="7" rx="1.5" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Chrome address bar -->
+            <div style="background:#fff;padding:6px 12px 8px">
+              <div style="background:#f1f3f4;border-radius:22px;padding:7px 12px;display:flex;align-items:center;gap:8px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                <span id="chromeAddrM" style="font-family:Arial,sans-serif;font-size:12px;color:#5f6368;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1">google.com/search</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </div>
+            </div>
+
+            <!-- Scrollable Google content -->
+            <div class="phone-content">
+              <div style="background:#fff;padding:10px 12px 16px;font-family:Arial,sans-serif">
+
+                <!-- Search bar -->
+                <div style="display:flex;align-items:center;background:#f1f3f4;border-radius:22px;padding:8px 14px;margin-bottom:10px;gap:8px">
+                  <div class="g-logo" style="font-size:16px;font-weight:900;letter-spacing:-1px;flex-shrink:0"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div>
+                  <span id="gSearchTermM" style="color:#202124;font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1"></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                </div>
+
+                <!-- Tabs -->
+                <div style="display:flex;gap:0;border-bottom:1px solid #dadce0;margin-bottom:10px;overflow-x:auto">
+                  <div style="padding:8px 12px;font-size:12px;color:#1a73e8;border-bottom:2px solid #1a73e8;white-space:nowrap">All</div>
+                  <div style="padding:8px 12px;font-size:12px;color:#5f6368;white-space:nowrap">Images</div>
+                  <div style="padding:8px 12px;font-size:12px;color:#5f6368;white-space:nowrap">News</div>
+                  <div style="padding:8px 12px;font-size:12px;color:#5f6368;white-space:nowrap">Videos</div>
+                  <div style="padding:8px 10px;font-size:12px;color:#5f6368">⋮</div>
+                </div>
+
+                <!-- Results count -->
+                <div style="font-size:11px;color:#70757a;margin-bottom:10px;font-family:Arial,sans-serif">About 1,24,00,000 results</div>
+
+                <!-- Result snippet -->
+                <div id="resultMobile" style="padding-bottom:12px;border-bottom:1px solid #ebebeb">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                    <div id="faviconM" style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;flex-shrink:0">B</div>
+                    <div>
+                      <div style="font-size:13px;color:#202124;font-family:Arial,sans-serif" id="breadcrumbM">bankbazaar.com</div>
+                    </div>
+                    <div style="margin-left:auto">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    </div>
+                  </div>
+                  <a class="g-title" id="gTitleM" href="#" style="font-size:18px;line-height:1.3;display:block;margin-bottom:4px;word-break:break-word">Page Title</a>
+                  <div style="font-size:13px;color:#4d5156;line-height:1.5;word-break:break-word"><span id="gDateM" class="g-date" style="display:none;color:#70757a"></span><span id="gDescM"></span></div>
+                </div>
+
+                <!-- Sitelinks mobile -->
+                <div id="sitelinksM" style="display:none;padding:10px 0 4px">
+                  <div style="display:flex;flex-wrap:wrap;gap:6px">
+                    <a href="#" style="background:#f1f3f4;border-radius:16px;padding:6px 14px;font-size:13px;color:#1a0dab;text-decoration:none;white-space:nowrap">Credit Cards</a>
+                    <a href="#" style="background:#f1f3f4;border-radius:16px;padding:6px 14px;font-size:13px;color:#1a0dab;text-decoration:none;white-space:nowrap">Loans</a>
+                    <a href="#" style="background:#f1f3f4;border-radius:16px;padding:6px 14px;font-size:13px;color:#1a0dab;text-decoration:none;white-space:nowrap">Home Loans</a>
+                    <a href="#" style="background:#f1f3f4;border-radius:16px;padding:6px 14px;font-size:13px;color:#1a0dab;text-decoration:none;white-space:nowrap">Insurance</a>
+                  </div>
+                </div>
+
+                <!-- Ghost results -->
+                <div style="padding:14px 0 10px;opacity:.35">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                    <div style="width:20px;height:20px;border-radius:50%;background:#e8eaed"></div>
+                    <div style="height:10px;background:#e8eaed;border-radius:4px;width:140px"></div>
+                  </div>
+                  <div style="height:14px;background:#e8eaed;border-radius:4px;width:90%;margin-bottom:6px"></div>
+                  <div style="height:10px;background:#e8eaed;border-radius:4px;width:95%;margin-bottom:4px"></div>
+                  <div style="height:10px;background:#e8eaed;border-radius:4px;width:75%"></div>
+                </div>
+                <div style="padding:10px 0;opacity:.2">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                    <div style="width:20px;height:20px;border-radius:50%;background:#e8eaed"></div>
+                    <div style="height:10px;background:#e8eaed;border-radius:4px;width:120px"></div>
+                  </div>
+                  <div style="height:14px;background:#e8eaed;border-radius:4px;width:85%;margin-bottom:6px"></div>
+                  <div style="height:10px;background:#e8eaed;border-radius:4px;width:90%"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Home indicator -->
+            <div class="phone-home"><div class="home-bar"></div></div>
+
+          </div><!-- /phone-screen -->
+        </div><!-- /phone -->
+      </div><!-- /phone-wrap -->
+    </div>
+
+  </div><!-- /preview-panel -->
+
+</div><!-- /wrap -->
+
+<footer>
+  Built by <a href="https://bhagya.engineer">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;·&nbsp;
+  <a href="https://bhagya.engineer/works/">← All Tools</a>
+  &nbsp;·&nbsp;
+  <a href="/blog/">Blog</a>
+</footer>
+
+<script>
+// ── Canvas pixel measurer ──
+const _canvas = document.createElement('canvas');
+const _ctx = _canvas.getContext('2d');
+function px(text, size, bold){
+  _ctx.font = (bold?'bold ':'')+size+'px Arial,sans-serif';
+  return Math.round(_ctx.measureText(text).width);
+}
+
+// ── Google pixel limits ──
+const LIMITS = {
+  desktop:{ title:{max:580,fs:20,bold:false}, desc:{max:920,fs:14,bold:false} },
+  mobile: { title:{max:450,fs:18,bold:false}, desc:{max:680,fs:14,bold:false} }
+};
+
+// ── Truncate to pixel width ──
+function truncatePx(text, maxPx, fontSize, bold){
+  if(!text) return {out:'',truncated:false};
+  if(px(text,fontSize,bold) <= maxPx) return {out:text,truncated:false};
+  let lo=0, hi=text.length;
+  while(lo<hi){
+    const mid=Math.floor((lo+hi+1)/2);
+    px(text.slice(0,mid)+'…',fontSize,bold)<=maxPx ? lo=mid : hi=mid-1;
+  }
+  return {out:text.slice(0,lo)+'…', truncated:true, safe:lo};
+}
+
+// ── URL → breadcrumb ──
+function makeBreadcrumb(url){
+  try{
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./,'');
+    const parts = u.pathname.split('/').filter(Boolean);
+    if(!parts.length) return host;
+    const crumbs = [host, ...parts.map(p=>p.replace(/[-_]/g,' ').replace(/\.html?$/,''))];
+    return crumbs.join(' › ');
+  } catch(e){
+    return url||'example.com';
+  }
+}
+function faviconLetter(url){
+  try{ return new URL(url).hostname.replace(/^www\./,'')[0].toUpperCase(); }
+  catch(e){ return 'G'; }
+}
+
+// ── Colour helpers ──
+function barColor(ratio){
+  if(ratio<=0.8) return '#10B981';
+  if(ratio<=1)   return '#F59E0B';
+  return '#E11D48';
+}
+function pillClass(status){
+  return status==='ok'?'sp-ok':status==='warn'?'sp-warn':status==='bad'?'sp-bad':'sp-info';
+}
+function pillText(status,what){
+  if(status==='ok') return '✅ Good';
+  if(status==='bad') return '❌ Too '+(what==='title'&&titleLen<10?'short':'long');
+  if(status==='warn') return '⚠️ Check';
+  return '—';
+}
+
+let titleLen=0, descLen=0;
+
+// ── Main update ──
+function update(){
+  const title = document.getElementById('titleInput').value;
+  const desc  = document.getElementById('descInput').value;
+  const url   = document.getElementById('urlInput').value.trim()||'https://www.bankbazaar.com/';
+  const showDate = document.getElementById('showDate').checked;
+  const showSL   = document.getElementById('showSitelinks').checked;
+  titleLen = title.length;
+  descLen  = desc.length;
+
+  // ── Title meters ──
+  const tpxD = px(title, 20, false);
+  const tpxM = px(title, 18, false);
+  const titleCharStatus = titleLen===0?'info':titleLen<30?'warn':titleLen<=65?'ok':'warn';
+
+  document.getElementById('titleCharCount').textContent = titleLen;
+  const tpill = document.getElementById('titlePill');
+  tpill.className='status-pill '+pillClass(titleCharStatus);
+  tpill.textContent = titleLen===0?'—':titleLen<30?'⚠️ Too short':titleLen<=65?'✅ Good':'⚠️ Too long';
+
+  document.getElementById('titlePxD').textContent = tpxD+'px';
+  document.getElementById('titlePxM').textContent = tpxM+'px';
+  const trD=Math.min(tpxD/580,1.05), trM=Math.min(tpxM/450,1.05);
+  document.getElementById('titleBarD').style.cssText=`width:${Math.min(trD*100,100)}%;background:${barColor(trD)}`;
+  document.getElementById('titleBarM').style.cssText=`width:${Math.min(trM*100,100)}%;background:${barColor(trM)}`;
+  document.getElementById('titleCharBar').style.cssText=`width:${Math.min(titleLen/70*100,100)}%;background:${barColor(titleLen/65)}`;
+
+  // ── Desc meters ──
+  const dpxD = px(desc, 14, false);
+  const dpxM = px(desc, 14, false);
+  const descCharStatus = descLen===0?'info':descLen<80?'warn':descLen<=165?'ok':'warn';
+
+  document.getElementById('descCharCount').textContent = descLen;
+  const dpill = document.getElementById('descPill');
+  dpill.className='status-pill '+pillClass(descCharStatus);
+  dpill.textContent = descLen===0?'—':descLen<80?'⚠️ Too short':descLen<=165?'✅ Good':'⚠️ Too long';
+
+  document.getElementById('descPxD').textContent = dpxD+'px';
+  document.getElementById('descPxM').textContent = dpxM+'px';
+  const drD=Math.min(dpxD/920,1.05), drM=Math.min(dpxM/680,1.05);
+  document.getElementById('descBarD').style.cssText=`width:${Math.min(drD*100,100)}%;background:${barColor(drD)}`;
+  document.getElementById('descBarM').style.cssText=`width:${Math.min(drM*100,100)}%;background:${barColor(drM)}`;
+  document.getElementById('descCharBar').style.cssText=`width:${Math.min(descLen/170*100,100)}%;background:${barColor(descLen/160)}`;
+
+  // ── Info grid ──
+  document.getElementById('infoTitlePx').textContent = tpxD+'px';
+  document.getElementById('infoTitlePx').style.color = barColor(tpxD/580);
+  document.getElementById('infoDescPx').textContent = dpxD+'px';
+  document.getElementById('infoDescPx').style.color = barColor(dpxD/920);
+
+  const tStatusText = tpxD===0?'Empty':tpxD<=580?'✅ Fits':tpxD<=620?'⚠️ Close':'❌ Cut off';
+  const dStatusText = dpxD===0?'Empty':dpxD<=920?'✅ Fits':dpxD<=980?'⚠️ Close':'❌ Cut off';
+  document.getElementById('infoTitleStatus').textContent = tStatusText;
+  document.getElementById('infoTitleStatus').style.color = tpxD===0?'#A0AEC0':tpxD<=580?'#10B981':tpxD<=620?'#F59E0B':'#E11D48';
+  document.getElementById('infoDescStatus').textContent = dStatusText;
+  document.getElementById('infoDescStatus').style.color = dpxD===0?'#A0AEC0':dpxD<=920?'#10B981':dpxD<=980?'#F59E0B':'#E11D48';
+
+  // ── Breadcrumb & favicon ──
+  const crumb = makeBreadcrumb(url);
+  const letter = faviconLetter(url);
+  ['D','M'].forEach(d=>{
+    document.getElementById('breadcrumb'+d).textContent = crumb;
+    document.getElementById('favicon'+d).textContent = letter;
+  });
+
+  // ── Search box ──
+  const searchTerm = title.split('|')[0].trim().split('-')[0].trim() || 'search query';
+  document.getElementById('gSearchTermD').textContent = searchTerm;
+  document.getElementById('gSearchTermM').textContent = searchTerm;
+  document.getElementById('chromeAddrD').textContent = 'google.com/search?q='+encodeURIComponent(searchTerm);
+  document.getElementById('chromeAddrM').textContent = 'google.com/search?q='+encodeURIComponent(searchTerm);
+
+  // ── Title render (desktop) ──
+  const tdD = truncatePx(title||'Untitled Page', 580, 20, false);
+  const tdM = truncatePx(title||'Untitled Page', 450, 18, false);
+  renderTitle('gTitleD', title, tdD);
+  renderTitle('gTitleM', title, tdM);
+
+  // ── Desc render ──
+  const ddD = truncatePx(desc||'No description provided.', 920, 14, false);
+  const ddM = truncatePx(desc||'No description provided.', 680, 14, false);
+  const today = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  renderDesc('gDescD', 'gDateD', desc, ddD, showDate, today);
+  renderDesc('gDescM', 'gDateM', desc, ddM, showDate, today);
+
+  // ── Sitelinks ──
+  document.getElementById('sitelinksD').style.display = showSL?'block':'none';
+  document.getElementById('sitelinksM').style.display = showSL?'block':'none';
+}
+
+function renderTitle(elId, raw, truncData){
+  const el = document.getElementById(elId);
+  if(!raw){ el.innerHTML='<span style="color:#bbb;font-style:italic">Your page title will appear here</span>'; return; }
+  if(!truncData.truncated){ el.textContent = truncData.out; return; }
+  const safe = raw.slice(0, truncData.safe||truncData.out.length-1);
+  el.innerHTML = esc(safe)+'<span style="color:#9aa0a6">…</span>';
+}
+
+function renderDesc(descId, dateId, raw, truncData, showDate, today){
+  const dateEl = document.getElementById(dateId);
+  const descEl = document.getElementById(descId);
+  if(showDate){ dateEl.style.display='inline'; dateEl.textContent=today+' — '; }
+  else { dateEl.style.display='none'; }
+  if(!raw){ descEl.innerHTML='<span style="color:#9aa0a6;font-style:italic">Your meta description will appear here…</span>'; return; }
+  if(!truncData.truncated){ descEl.textContent=truncData.out; return; }
+  const safe = raw.slice(0, truncData.safe||truncData.out.length-1);
+  descEl.innerHTML = esc(safe)+'<span style="color:#9aa0a6">…</span>';
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Device toggle ──
+let currentDevice = 'desktop';
+function setDevice(d){
+  currentDevice = d;
+  document.getElementById('previewDesktop').style.display = d==='desktop'?'block':'none';
+  document.getElementById('previewMobile').style.display  = d==='mobile'?'block':'none';
+  document.getElementById('tabDesktop').classList.toggle('active', d==='desktop');
+  document.getElementById('tabMobile').classList.toggle('active', d==='mobile');
+}
+
+// ── Init with sample ──
+document.getElementById('titleInput').value = 'Best Credit Cards in India 2025 | Compare & Apply | BankBazaar';
+document.getElementById('descInput').value  = 'Compare 100+ credit cards from top banks. Get reward points, cashback, travel miles & more. Check eligibility, apply online & get instant approval.';
+document.getElementById('urlInput').value   = 'https://www.bankbazaar.com/credit-card.html';
+update();
+</script>
+</body>
+</html>

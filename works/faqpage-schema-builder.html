@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNL3R9YSHG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SNL3R9YSHG');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FAQPage Schema Builder | Works · Bhagya Lakshmi T</title>
+<meta name="description" content="Free FAQPage JSON-LD Schema Builder — enter up to 10 Q&amp;A pairs and get ready-to-paste structured data markup for Google rich results. No login needed."/>
+<link rel="canonical" href="https://bhagya.engineer/works/faqpage-schema-builder.html"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='36' y2='36' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='36' height='36' rx='10' fill='url(%23b)'/%3E%3Ctext x='7' y='27' font-family='Arial Black%2CArial%2Csans-serif' font-size='23' font-weight='900' fill='white'%3EB%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400&display=swap"/></noscript>
+<style>
+:root{--p:#E11D48;--s:#0D9488;--a:#F59E0B;--pk:#8B5CF6;--g:#10B981;--bg:#0D0B1A;--text:#FFFFFF;--muted:#A0AEC0;--border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.06);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(13,11,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem}
+.nav-logo em{color:#FB923C;font-style:normal}
+.nav-back{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+.hero{padding:52px 24px 36px;text-align:center;max-width:700px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);color:#C4B5FD;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:5px 14px;border-radius:50px;margin-bottom:18px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;line-height:1.15;margin-bottom:10px}
+.hero h1 span{background:linear-gradient(135deg,#C4B5FD,#818CF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.92rem;max-width:480px;margin:0 auto}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px 64px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:10px}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700}
+.card>p{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+.faq-pairs{display:flex;flex-direction:column;gap:16px}
+.faq-pair{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative}
+.pair-num{position:absolute;top:14px;left:18px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);padding:2px 8px;border-radius:50px}
+.pair-inner{padding-top:28px}
+.pair-inner label{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.pair-inner input[type=text],.pair-inner textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:8px;padding:10px 13px;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;margin-bottom:10px}
+.pair-inner input[type=text]:focus,.pair-inner textarea:focus{border-color:rgba(139,92,246,.4);box-shadow:0 0 0 3px rgba(139,92,246,.08)}
+.pair-inner input::placeholder,.pair-inner textarea::placeholder{color:#4a5568}
+.pair-inner textarea{min-height:72px;resize:vertical;line-height:1.6}
+.btn-remove{position:absolute;top:14px;right:16px;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.2);color:#FDA4AF;border-radius:6px;padding:3px 9px;font-size:.72rem;cursor:pointer;transition:all .2s}
+.btn-remove:hover{background:rgba(225,29,72,.2)}
+.btn-add{display:inline-flex;align-items:center;gap:7px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#C4B5FD;border-radius:10px;padding:10px 20px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:20px}
+.btn-add:hover{background:rgba(139,92,246,.2)}
+.btn-go{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7C3AED,#4F46E5);color:#fff;border:none;border-radius:10px;padding:12px 28px;font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .25s}
+.btn-go:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.4)}
+.output-section{display:none}
+.output-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+.output-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}
+.output-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-copy-all{display:inline-flex;align-items:center;gap:6px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#C4B5FD;border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-copy-all:hover{background:rgba(139,92,246,.25)}
+.btn-copy-all.copied{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6EE7B7}
+.code-block{background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:12px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;color:#E2E8F0;overflow-x:auto;white-space:pre;word-break:break-word;max-height:500px;overflow-y:auto}
+.code-block .key{color:#C4B5FD}.code-block .str{color:#6EE7B7}.code-block .punc{color:#64748b}
+.val-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.vs-card{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.vs-num{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;line-height:1}
+.vs-lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.tips-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;margin-top:20px}
+.tips-title{font-size:.75rem;font-weight:700;color:#6EE7B7;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.tips-list{display:flex;flex-direction:column;gap:6px}
+.tip{font-size:.8rem;color:var(--muted);display:flex;gap:8px}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:.07}
+.o1{width:500px;height:500px;background:var(--pk);top:-200px;right:-150px}
+.o2{width:400px;height:400px;background:var(--s);bottom:-100px;left:-80px}
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--muted);font-size:.8rem;position:relative;z-index:1}
+footer a{color:var(--p);text-decoration:none}
+@media(max-width:768px){nav{padding:12px 16px}.hero{padding:36px 16px 24px}.wrap{padding:0 16px 48px}.val-strip{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<nav>
+  <a href="https://bhagya.engineer" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><defs><linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs><rect width="36" height="36" rx="10" fill="url(#lg)"/><text x="7" y="27" font-family="Arial Black,Arial,sans-serif" font-size="23" font-weight="900" fill="white">B</text></svg>
+    Bhagya <em>Lakshmi</em>
+  </a>
+  <a href="/works/" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    All Tools
+  </a>
+  <a href="/blog/" class="nav-back" style="margin-left:8px">Blog</a>
+</nav>
+<div class="hero">
+  <div class="badge">🔧 Schema Builder</div>
+  <h1>FAQPage <span>Schema Builder</span></h1>
+  <p>Enter up to 10 Q&amp;A pairs and get production-ready FAQPage JSON-LD schema markup — paste directly into your &lt;head&gt; for Google rich results.</p>
+</div>
+<div class="wrap">
+  <div class="card">
+    <div class="card-header">
+      <h2>❓ Add FAQ Pairs</h2>
+      <span style="font-size:.78rem;color:var(--muted)" id="pairCount">1 / 10 pairs</span>
+    </div>
+    <p>Add your questions and answers. Minimum 1, maximum 10 pairs.</p>
+    <div class="faq-pairs" id="faqPairs"></div>
+    <button class="btn-add" onclick="addPair()" id="addBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Add Another FAQ
+    </button>
+    <button class="btn-go" onclick="buildSchema()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+      Generate Schema
+    </button>
+  </div>
+  <div class="output-section" id="outputSection">
+    <div class="val-strip" id="valStrip"></div>
+    <div class="output-topbar">
+      <div class="output-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        JSON-LD Schema Markup
+      </div>
+      <div class="output-actions">
+        <button class="btn-copy-all" id="copyAllBtn" onclick="copySchema()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy Schema
+        </button>
+      </div>
+    </div>
+    <div class="code-block" id="codeBlock"></div>
+    <div class="tips-box">
+      <div class="tips-title">📌 How to Use</div>
+      <div class="tips-list">
+        <div class="tip"><span>1.</span><span>Copy the schema above and paste it inside the <code style="color:#C4B5FD">&lt;head&gt;</code> of your HTML page.</span></div>
+        <div class="tip"><span>2.</span><span>Validate using <strong>Google's Rich Results Test</strong> at search.google.com/test/rich-results</span></div>
+        <div class="tip"><span>3.</span><span>Make sure the FAQ content on your page exactly matches the Q&A pairs in the schema.</span></div>
+        <div class="tip"><span>4.</span><span>Google can show up to 3 Q&A pairs as rich snippets in search results.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>Built by <a href="https://bhagya.engineer">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;·&nbsp; <a href="/works/">← All Tools</a> &nbsp;·&nbsp; <a href="/blog/">Blog</a></footer>
+<script>
+let pairCount = 0;
+
+function addPair(q='', a=''){
+  const container = document.getElementById('faqPairs');
+  if(pairCount >= 10){ alert('Maximum 10 FAQ pairs allowed.'); return; }
+  pairCount++;
+  const div = document.createElement('div');
+  div.className = 'faq-pair';
+  div.dataset.id = pairCount;
+  div.innerHTML = `
+    <div class="pair-num">FAQ ${pairCount}</div>
+    ${pairCount > 1 ? `<button class="btn-remove" onclick="removePair(this)">✕ Remove</button>` : ''}
+    <div class="pair-inner">
+      <label>Question</label>
+      <input type="text" class="faq-q" placeholder="e.g. What is the minimum credit score for a credit card?" value="${esc(q)}"/>
+      <label>Answer</label>
+      <textarea class="faq-a" placeholder="e.g. Most banks require a CIBIL score of 700 or above to qualify for a credit card. Premium cards may require 750+.">${esc(a)}</textarea>
+    </div>`;
+  container.appendChild(div);
+  updatePairCount();
+  document.getElementById('addBtn').style.display = pairCount >= 10 ? 'none' : 'inline-flex';
+}
+
+function removePair(btn){
+  const pair = btn.closest('.faq-pair');
+  pair.remove();
+  pairCount--;
+  // Renumber
+  document.querySelectorAll('.faq-pair').forEach((p,i)=>{
+    p.querySelector('.pair-num').textContent = 'FAQ '+(i+1);
+  });
+  updatePairCount();
+  document.getElementById('addBtn').style.display = pairCount >= 10 ? 'none' : 'inline-flex';
+}
+
+function updatePairCount(){
+  document.getElementById('pairCount').textContent = pairCount + ' / 10 pairs';
+}
+
+function buildSchema(){
+  const pairs = [];
+  let valid = 0, empty = 0;
+  document.querySelectorAll('.faq-pair').forEach(p=>{
+    const q = p.querySelector('.faq-q').value.trim();
+    const a = p.querySelector('.faq-a').value.trim();
+    if(q && a){ pairs.push({q,a}); valid++; }
+    else if(!q && !a) empty++;
+  });
+
+  if(!pairs.length){ alert('Please add at least one complete Q&A pair.'); return; }
+
+  // Build JSON-LD
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": pairs.map(p=>({
+      "@type": "Question",
+      "name": p.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": p.a
+      }
+    }))
+  };
+
+  const jsonStr = JSON.stringify(schema, null, 2);
+  const scriptTag = `<script type="application/ld+json">\n${jsonStr}\n<\/script>`;
+
+  // Syntax-highlight
+  const highlighted = scriptTag
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/("(?:[^"\\]|\\.)*")(\s*:)/g, '<span class="key">$1</span>$2')
+    .replace(/:\s*("(?:[^"\\]|\\.)*")/g, ': <span class="str">$1</span>')
+    .replace(/[{}\[\],]/g, '<span class="punc">$&</span>');
+
+  document.getElementById('codeBlock').innerHTML = highlighted;
+
+  // Store raw for copying
+  window._schemaRaw = scriptTag;
+
+  // Validation strip
+  document.getElementById('valStrip').innerHTML = `
+    <div class="vs-card"><div class="vs-num" style="color:#6EE7B7">${valid}</div><div class="vs-lbl">Valid Pairs</div></div>
+    <div class="vs-card"><div class="vs-num" style="color:#C4B5FD">${jsonStr.length}</div><div class="vs-lbl">Schema Size</div></div>
+    <div class="vs-card"><div class="vs-num" style="color:${pairs.length>=3?'#6EE7B7':'#FCD34D'}">${pairs.length>=3?'✅':'⚠️'}</div><div class="vs-lbl">${pairs.length>=3?'3+ for Rich Snippets':'Add 1 more for best results'}</div></div>`;
+
+  document.getElementById('outputSection').style.display = 'block';
+  document.getElementById('outputSection').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copySchema(){
+  if(!window._schemaRaw){ alert('Generate schema first.'); return; }
+  navigator.clipboard.writeText(window._schemaRaw).then(()=>{
+    const btn = document.getElementById('copyAllBtn');
+    btn.classList.add('copied');
+    btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Copied!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Schema';}, 2000);
+  });
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+// Initialise with 3 example pairs
+addPair('What is a credit card?', 'A credit card is a payment card issued by a financial institution that allows cardholders to borrow funds to pay for goods and services, with the agreement to repay the amount later with interest if not paid in full.');
+addPair('What is the minimum CIBIL score required for a credit card?', 'Most banks require a CIBIL score of 700 or above to qualify for a credit card. For premium cards, a score of 750 or higher is typically required.');
+addPair('How do I apply for a credit card online?', 'You can apply for a credit card online by visiting the bank\'s official website or a comparison platform, filling in your personal and financial details, and submitting the application. Approval can take anywhere from a few minutes to a few days.');
+</script>
+</body>
+</html>
