@@ -1173,4 +1173,113 @@ footer a:hover{color:#C4B5FD}
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
-  function resize(){ W = canvas.width = w
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  class P {
+    constructor(){
+      this.x = Math.random()*W;
+      this.y = Math.random()*H;
+      this.r = Math.random()*1.5+.3;
+      this.vx = (Math.random()-.5)*.3;
+      this.vy = (Math.random()-.5)*.3;
+      this.alpha = Math.random()*.4+.05;
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(139,92,246,${this.alpha})`;
+      ctx.fill();
+    }
+    update(){
+      this.x += this.vx; this.y += this.vy;
+      if(this.x<0||this.x>W) this.vx*=-1;
+      if(this.y<0||this.y>H) this.vy*=-1;
+    }
+  }
+  for(let i=0;i<90;i++) particles.push(new P());
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{ p.update(); p.draw(); });
+    // connections
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<100){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(139,92,246,${.06*(1-dist/100)})`;
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+});
+
+
+// ── Counter animation ──
+function animateCount(el, target, duration){
+  const start = performance.now();
+  function step(now){
+    const progress = Math.min((now-start)/duration,1);
+    const ease = 1-Math.pow(1-progress,3);
+    el.textContent = Math.round(ease*target);
+    if(progress<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── Scroll reveal + counter trigger ──
+const reveals = document.querySelectorAll('.reveal');
+const statCards = document.querySelectorAll('.stat-card');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      const el = e.target.querySelector('[data-target]');
+      if(el){
+        const t = parseInt(el.dataset.target);
+        if(t>0) animateCount(el,t,1200);
+      }
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:.15});
+reveals.forEach(r=>io.observe(r));
+statCards.forEach(c=>io.observe(c));
+
+
+// ── SERP typewriter ──
+const terms = [
+  'best home loan rates india',
+  'credit card cashback offers',
+  'personal loan eligibility calculator',
+  'mutual fund SIP returns 2024',
+  'car insurance premium calculator',
+  'fixed deposit interest rates',
+  'business loan for startups',
+  'health insurance for family'
+];
+let termIdx = 0, charIdx = 0;
+const serpQ = document.getElementById('serp-q');
+function typeNext(){
+  if(!serpQ) return;
+  const term = terms[termIdx % terms.length];
+  if(charIdx < term.length){
+    serpQ.textContent = term.slice(0, ++charIdx);
+    setTimeout(typeNext, 75);
+  } else {
+    setTimeout(function(){ charIdx = 0; termIdx++; typeNext(); }, 2200);
+  }
+}
+typeNext();
+
+</script>
+</body>
+</html>

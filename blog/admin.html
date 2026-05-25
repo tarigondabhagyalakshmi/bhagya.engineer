@@ -821,4 +821,132 @@ function schedulePost(){
   const schVal=document.getElementById('scheduledDate').value;
   if(!schVal){toast('Set a scheduled date first','error');return;}
   if(new Date(schVal)<=new Date()){toast('Scheduled date must be in the future','error');return;}
-  upsertPo
+  upsertPost('scheduled','Schedule');
+}
+
+function upsertPost(status,action){
+  const post=buildPostObj(status);
+  if(editingId){const idx=posts.findIndex(p=>p.id===editingId);if(idx>=0)posts[idx]=post;else posts.push(post);}
+  else{posts.push(post);editingId=post.id;}
+  const msgs={published:'🚀 Published live!',draft:'Draft saved',scheduled:'Post scheduled'};
+  savePostsToGitHub(action+': '+post.title).then(()=>{
+    toast(msgs[status]||'Saved ✓','success');
+    document.getElementById('editorTitle').textContent='Editing: '+post.title.slice(0,40);
+    renderOverview();
+  });
+}
+
+async function savePostsToGitHub(commitMsg){
+  const token=getGHToken();const repo=getGHRepo();
+  if(!token){toast('No GitHub token — add one in Settings','error');return;}
+  try{
+    const data={meta:{version:'1.0',lastUpdated:new Date().toISOString(),totalPosts:posts.length},posts};
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const getR=await fetch(`https://api.github.com/repos/${repo}/contents/blog/posts.json`,{
+      headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json'}
+    });
+    const getSha=getR.ok?(await getR.json()).sha:undefined;
+    const body={message:commitMsg,content,branch:'main'};
+    if(getSha)body.sha=getSha;
+    const putR=await fetch(`https://api.github.com/repos/${repo}/contents/blog/posts.json`,{
+      method:'PUT',
+      headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(!putR.ok)throw new Error(await putR.text());
+    toast('Saved to GitHub ✓ Deploying…','success');
+  }catch(err){
+    toast('GitHub error: '+err.message.slice(0,60),'error');
+    console.error(err);
+  }
+}
+
+function saveSettings(){
+  const tok=document.getElementById('settingsToken').value.trim();
+  const repo=document.getElementById('settingsRepo').value.trim();
+  if(tok)localStorage.setItem('bl_gh_token',tok);
+  if(repo)localStorage.setItem('bl_gh_repo',repo);
+  toast('Settings saved ✓','success');
+}
+
+async function changePassword(){
+  const p1=document.getElementById('newPass').value;
+  const p2=document.getElementById('confirmPass').value;
+  if(!p1){toast('Enter a new password','error');return;}
+  if(p1!==p2){toast('Passwords do not match','error');return;}
+  if(p1.length<8){toast('Password must be at least 8 characters','error');return;}
+  const h=await sha256(p1);
+  localStorage.setItem('bl_pass_hash',h);
+  document.getElementById('newPass').value='';
+  document.getElementById('confirmPass').value='';
+  toast('Password updated — please re-login','success');
+  setTimeout(logout,2000);
+}
+
+function clearAllData(){
+  if(!confirm('Clear all local data? Default credentials will be restored.'))return;
+  ['bl_pass_hash','bl_gh_token','bl_gh_repo','bl_setup_skipped','bl_username'].forEach(k=>localStorage.removeItem(k));
+  toast('Local data cleared','success');
+}
+
+function slugify(s){return(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+
+function autoSlug(){
+  const slug=slugify(document.getElementById('postTitle').value);
+  document.getElementById('postSlug').value=slug;
+  document.getElementById('slugPreview').textContent=slug||'…';
+  updateCharCounts();
+}
+
+function toggleSchedule(){
+  document.getElementById('scheduleGroup').style.display=document.getElementById('postStatus').value==='scheduled'?'block':'none';
+}
+
+function updateCharCounts(){
+  countField('postTitle','titleCount',70);
+  countField('postExcerpt','excerptCount',160);
+  countField('seoTitle','seoTitleCount',60);
+  countField('seoDesc','seoDescCount',160);
+}
+
+function countField(inputId,countId,max){
+  const el=document.getElementById(inputId);const cnt=document.getElementById(countId);
+  if(!el||!cnt)return;
+  const len=el.value.length;
+  cnt.textContent=len+' / '+max;
+  cnt.className='char-count'+(len>max?' over':len>max*.85?' warn':'');
+}
+
+function handleTagInput(e){
+  if(e.key==='Enter'||e.key===','){e.preventDefault();addTag();}
+  if(e.key==='Backspace'&&!e.target.value&&currentTags.length){currentTags.pop();renderTagPills();}
+}
+
+function addTag(){
+  const inp=document.getElementById('tagInput');
+  const tag=inp.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/^-|-$/g,'');
+  if(tag&&!currentTags.includes(tag)&&currentTags.length<10){currentTags.push(tag);inp.value='';renderTagPills();}
+  else inp.value='';
+}
+
+function removeTag(t){currentTags=currentTags.filter(x=>x!==t);renderTagPills();}
+
+function renderTagPills(){
+  const wrap=document.getElementById('tagWrap');
+  const pills=currentTags.map(t=>`<span class="tag-pill">${t}<button onclick="removeTag('${t}')" type="button">×</button></span>`).join('');
+  wrap.innerHTML=pills+'<input type="text" id="tagInput" placeholder="'+(currentTags.length?'':'add tag…')+'" onkeydown="handleTagInput(event)"/>';
+}
+
+function toast(msg,type='success'){
+  const container=document.getElementById('toast');
+  const item=document.createElement('div');
+  item.className='toast-item toast-'+type;
+  item.textContent=msg;
+  container.appendChild(item);
+  setTimeout(()=>{item.style.opacity='0';item.style.transition='opacity .3s';setTimeout(()=>item.remove(),300);},3500);
+}
+
+if(isLoggedIn()){document.getElementById('loginScreen').style.display='none';initDashboard();}
+</script>
+</body>
+</html>

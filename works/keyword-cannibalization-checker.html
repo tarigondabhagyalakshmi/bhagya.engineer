@@ -136,6 +136,7 @@ function parseData(raw){
   const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
   const rows = [];
   lines.forEach(line=>{
+    // Try tab split first, then comma, then space after URL
     let url='', kw='';
     if(line.includes('\t')){
       const parts = line.split('\t');
@@ -157,41 +158,88 @@ function parseData(raw){
 function checkCannibalization(){
   const raw = document.getElementById('dataInput').value;
   const rows = parseData(raw);
+
   if(!rows.length){ alert('No valid URL+keyword pairs found. Please check the format.'); return; }
+
+  // Group by keyword
   const kwMap = {};
   rows.forEach(r=>{
     if(!kwMap[r.kw]) kwMap[r.kw] = [];
     if(!kwMap[r.kw].find(u=>u===r.url)) kwMap[r.kw].push(r.url);
   });
+
   const cannibalised = Object.entries(kwMap).filter(([,urls])=>urls.length>1);
   const clean = Object.entries(kwMap).filter(([,urls])=>urls.length===1);
+
+  // Summary
   document.getElementById('summaryStrip').innerHTML = `
     <div class="ss-card"><div class="ss-num" style="color:#93C5FD">${rows.length}</div><div class="ss-lbl">Total Rows</div></div>
     <div class="ss-card"><div class="ss-num" style="color:${cannibalised.length?'var(--p)':'var(--g)'}">${cannibalised.length}</div><div class="ss-lbl">Cannibalised Keywords</div></div>
     <div class="ss-card"><div class="ss-num" style="color:var(--g)">${clean.length}</div><div class="ss-lbl">Clean Keywords</div></div>
     <div class="ss-card"><div class="ss-num" style="color:#FCD34D">${Object.keys(kwMap).length}</div><div class="ss-lbl">Unique Keywords</div></div>`;
+
   let html = '';
   if(!cannibalised.length){
-    html = `<div class="clean-banner"><div style="font-size:2rem;margin-bottom:8px">🎉</div><div style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#6EE7B7;margin-bottom:4px">No Cannibalization Found!</div><div style="font-size:.85rem;color:var(--muted)">All ${clean.length} keywords map to a single page. Your site structure looks clean.</div></div>`;
+    html = `<div class="clean-banner">
+      <div style="font-size:2rem;margin-bottom:8px">🎉</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#6EE7B7;margin-bottom:4px">No Cannibalization Found!</div>
+      <div style="font-size:.85rem;color:var(--muted)">All ${clean.length} keywords map to a single page. Your site structure looks clean.</div>
+    </div>`;
   } else {
     cannibalised.sort((a,b)=>b[1].length-a[1].length).forEach(([kw,urls])=>{
       const risk = urls.length>=4?'high':urls.length===3?'med':'low';
       const riskLabels = {high:'🔴 High Risk',med:'🟡 Medium Risk',low:'🟠 Low Risk'};
       const riskClass = {high:'risk-high',med:'risk-med',low:'risk-low'};
-      const canonical = urls[0];
+      const canonical = urls[0]; // Recommend first as canonical (could be extended with heuristics)
       const canonicalTag = `<link rel="canonical" href="${canonical}"/>`;
       const actions = urls.length>=3
         ? [{cls:'ap-merge',txt:'Merge pages'},{cls:'ap-canonical',txt:'Set canonical'},{cls:'ap-consolidate',txt:'301 redirect'}]
         : [{cls:'ap-canonical',txt:'Set canonical'},{cls:'ap-consolidate',txt:'301 redirect'}];
-      html += `<div class="cluster-card"><div class="cluster-header"><div><div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">${urls.length} pages competing</div><div class="cluster-kw">"${esc(kw)}"</div></div><span class="risk-badge ${riskClass[risk]}">${riskLabels[risk]}</span></div>`;
-      html += `<table class="url-table"><thead><tr><th>#</th><th>Competing URL</th><th>Role</th></tr></thead><tbody>${urls.map((u,i)=>`<tr><td style="color:var(--muted);font-size:.72rem">${i+1}</td><td class="url-cell">${esc(u)}</td><td>${i===0?'<span style="font-size:.7rem;font-weight:700;color:#6EE7B7;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);padding:2px 8px;border-radius:50px">Recommended Canonical</span>':'<span style="font-size:.7rem;color:var(--muted)">Duplicate / Cannibalising</span>'}</td></tr>`).join('')}</tbody></table>`;
-      html += `<div class="action-pills">${actions.map(a=>`<span class="ap ${a.cls}">${a.txt}</span>`).join('')}</div>`;
-      html += `<div class="canonical-tag"><div class="ct-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Recommended Canonical Tag (add to duplicate pages)</div><div class="ct-code">${esc(canonicalTag)}</div><button class="btn-copy-small" onclick="copyText('${esc(canonicalTag)}', this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy Tag</button></div></div>`;
+
+      html += `<div class="cluster-card">
+        <div class="cluster-header">
+          <div>
+            <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">${urls.length} pages competing</div>
+            <div class="cluster-kw">"${esc(kw)}"</div>
+          </div>
+          <span class="risk-badge ${riskClass[risk]}">${riskLabels[risk]}</span>
+        </div>
+        <table class="url-table">
+          <thead><tr><th>#</th><th>Competing URL</th><th>Role</th></tr></thead>
+          <tbody>
+            ${urls.map((u,i)=>`
+              <tr>
+                <td style="color:var(--muted);font-size:.72rem">${i+1}</td>
+                <td class="url-cell">${esc(u)}</td>
+                <td>${i===0?'<span style="font-size:.7rem;font-weight:700;color:#6EE7B7;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);padding:2px 8px;border-radius:50px">Recommended Canonical</span>':'<span style="font-size:.7rem;color:var(--muted)">Duplicate / Cannibalising</span>'}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+        <div class="action-pills">${actions.map(a=>`<span class="ap ${a.cls}">${a.txt}</span>`).join('')}</div>
+        <div class="canonical-tag">
+          <div class="ct-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Recommended Canonical Tag (add to duplicate pages)
+          </div>
+          <div class="ct-code">${esc(canonicalTag)}</div>
+          <button class="btn-copy-small" onclick="copyText('${esc(canonicalTag)}', this)">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Tag
+          </button>
+        </div>
+      </div>`;
     });
+
     if(clean.length){
-      html += `<div style="background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:14px;margin-top:4px"><div style="font-size:.78rem;font-weight:700;color:#6EE7B7;margin-bottom:8px">✅ Clean Keywords (${clean.length}) — No Action Needed</div><div style="display:flex;flex-wrap:wrap;gap:6px">${clean.map(([kw])=>`<span style="font-size:.72rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);color:#86EFAC;padding:3px 10px;border-radius:50px">${esc(kw)}</span>`).join('')}</div></div>`;
+      html += `<div style="background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:14px;margin-top:4px">
+        <div style="font-size:.78rem;font-weight:700;color:#6EE7B7;margin-bottom:8px">✅ Clean Keywords (${clean.length}) — No Action Needed</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${clean.map(([kw])=>`<span style="font-size:.72rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);color:#86EFAC;padding:3px 10px;border-radius:50px">${esc(kw)}</span>`).join('')}
+        </div>
+      </div>`;
     }
   }
+
   document.getElementById('clustersContainer').innerHTML = html;
   document.getElementById('resultsSection').style.display = 'block';
   document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});

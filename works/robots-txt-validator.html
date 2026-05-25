@@ -209,18 +209,22 @@ function matchesPattern(path, pattern){
 
 // For a given path and group, return the most specific rule result
 function checkGroup(path, group){
+  // Collect all matching rules with their specificity
   const matches = [];
   group.allow.forEach(r=>{ if(matchesPattern(path,r)) matches.push({type:'allow',rule:'Allow: '+r,len:r.length}); });
   group.disallow.forEach(r=>{ if(matchesPattern(path,r)) matches.push({type:'disallow',rule:'Disallow: '+r,len:r.length}); });
   if(!matches.length) return {result:'allow',rule:'Default (no matching rule)',agent:group.agents.join(', ')};
+  // Most specific (longest) rule wins
   matches.sort((a,b)=>b.len-a.len);
   const winner = matches[0];
   return {result:winner.type,rule:winner.rule,agent:group.agents.join(', ')};
 }
 
 function getApplicableGroup(path, groups, targetAgent='Googlebot'){
+  // 1. Try specific agent group first
   const specific = groups.find(g=>g.agents.some(a=>a.toLowerCase()===targetAgent.toLowerCase()));
   if(specific){ const r=checkGroup(path,specific); if(r.rule!=='Default (no matching rule)') return r; }
+  // 2. Fall back to * group
   const wildcard = groups.find(g=>g.agents.includes('*'));
   if(wildcard) return checkGroup(path,wildcard);
   return {result:'allow',rule:'Default (no robots.txt rule)',agent:'*'};
@@ -229,28 +233,41 @@ function getApplicableGroup(path, groups, targetAgent='Googlebot'){
 function validateRobots(){
   const robotsTxt = document.getElementById('robotsInput').value.trim();
   const urlsRaw = document.getElementById('urlsInput').value.trim();
+
   if(!robotsTxt){ alert('Please paste your robots.txt content.'); return; }
   if(!urlsRaw){ alert('Please enter at least one test URL.'); return; }
+
   const groups = parseRobots(robotsTxt);
   const paths = urlsRaw.split('\n').map(u=>{
     u = u.trim();
+    // Strip domain if present
     try{ const url=new URL(u.startsWith('http')?u:'http://x.com'+u); return url.pathname+(url.search||''); } catch(e){ return u.startsWith('/')?u:'/'+u; }
   }).filter(u=>u.length>0).slice(0,10);
+
+  // Build results
   const results = paths.map(path=>{
     return {path, ...getApplicableGroup(path, groups)};
   });
+
   const allowed = results.filter(r=>r.result==='allow').length;
   const blocked = results.filter(r=>r.result==='disallow').length;
   const sitemaps = groups.flatMap(g=>g.sitemap);
+
+  // Summary
   document.getElementById('summaryStrip').innerHTML = `
     <div class="ss-card"><div class="ss-num" style="color:#93C5FD">${paths.length}</div><div class="ss-lbl">URLs Tested</div></div>
     <div class="ss-card"><div class="ss-num" style="color:var(--g)">${allowed}</div><div class="ss-lbl">Allowed</div></div>
     <div class="ss-card"><div class="ss-num" style="color:var(--p)">${blocked}</div><div class="ss-lbl">Blocked</div></div>
     <div class="ss-card"><div class="ss-num" style="color:#FCD34D">${groups.length}</div><div class="ss-lbl">Rule Groups</div></div>
     <div class="ss-card"><div class="ss-num" style="color:${sitemaps.length?'#6EE7B7':'var(--p)'}">${sitemaps.length?'✅':'❌'}</div><div class="ss-lbl">Sitemap Listed</div></div>`;
+
+  // Risk analysis
   const risks = [];
   const allDisallow = groups.flatMap(g=>g.disallow.map(r=>({agent:g.agents.join(', '),rule:r})));
-  if(allDisallow.find(r=>r.rule==='/')){risks.push({level:'high',icon:'🚨',msg:'Disallow: / blocks ALL crawlers',detail:'One or more user-agent groups have Disallow: / — this will block all search engine access.'});}
+
+  if(allDisallow.find(r=>r.rule==='/')){
+    risks.push({level:'high',icon:'🚨',msg:'Disallow: / blocks ALL crawlers',detail:'One or more user-agent groups have Disallow: / — this will block all search engine access.'});
+  }
   const cssJs = allDisallow.find(r=>r.rule.includes('.css')||r.rule.includes('.js'));
   if(cssJs) risks.push({level:'high',icon:'⚠️',msg:'CSS/JS files may be blocked',detail:`Rule "${cssJs.rule}" may prevent Google from rendering JavaScript or styling. This can hurt rankings.`});
   if(!sitemaps.length) risks.push({level:'med',icon:'🗺️',msg:'No Sitemap directive found',detail:'Adding a Sitemap: line helps search engines discover all your pages faster.'});
@@ -259,12 +276,15 @@ function validateRobots(){
   const crawlDelays = groups.filter(g=>g.crawlDelay).map(g=>`${g.agents.join(', ')}: ${g.crawlDelay}s`);
   if(crawlDelays.length) risks.push({level:'med',icon:'🐢',msg:`Crawl-delay set (${crawlDelays.join(', ')})`,detail:'Crawl-delay slows down indexing. Only use if your server struggles under crawler load.'});
   if(!risks.length) risks.push({level:'low',icon:'✅',msg:'No critical issues detected',detail:'Your robots.txt looks clean. No immediate SEO risks found.'});
+
   const riskLevelClass = {high:'risk-high',med:'risk-med',low:'risk-low'};
   document.getElementById('riskSection').innerHTML = `
     <div class="risk-section">
       <div class="risk-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Risk Flags</div>
       <div class="risk-list">${risks.map(r=>`<div class="risk-item ${riskLevelClass[r.level]}"><span class="risk-icon">${r.icon}</span><div class="risk-content"><div class="risk-msg">${esc(r.msg)}</div><div class="risk-detail">${esc(r.detail)}</div></div></div>`).join('')}</div>
     </div>`;
+
+  // URL results table
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
   results.forEach((r,i)=>{
@@ -278,6 +298,8 @@ function validateRobots(){
     tbody.appendChild(tr);
   });
   document.getElementById('tableWrap').style.display='block';
+
+  // Parsed rules display
   const rulesList = document.getElementById('rulesList');
   rulesList.innerHTML = groups.map(g=>`
     <div class="rule-group">
@@ -290,6 +312,7 @@ function validateRobots(){
       </div>
     </div>`).join('');
   document.getElementById('rulesPanel').style.display='block';
+
   document.getElementById('resultsSection').style.display='block';
   document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -310,6 +333,7 @@ User-agent: Bingbot
 Disallow: /
 
 Sitemap: https://bankbazaar.com/sitemap.xml`;
+
   document.getElementById('urlsInput').value = `/admin/dashboard
 /blog/seo-guide
 /private/data.json

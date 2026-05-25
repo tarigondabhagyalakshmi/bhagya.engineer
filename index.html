@@ -2691,4 +2691,20 @@ footer a{text-decoration:none}
     var mg=document.getElementById('cf-message').value.trim();
     if(!nm||!em||!mg){alert('Please fill in Name, Email and Message.');return;}
     var subj=encodeURIComponent('Contact from '+nm+(co?' · '+co:''));
-    var body=encodeURIComponent('Name: 
+    var body=encodeURIComponent('Name: '+nm+'\nEmail: '+em+(co?'\nCompany: '+co:'')+'\n\nMessage:\n'+mg);
+    window.location.href='mailto:bhagya.t2026@gmail.com?subject='+subj+'&body='+body;
+    document.getElementById('cf-success').style.display='block';
+    e.target.reset();
+  }
+
+  // Copy email to clipboard
+  function copyText(text,el){
+    navigator.clipboard.writeText(text).then(()=>{
+      el.classList.add('copied');
+      setTimeout(()=>el.classList.remove('copied'),2000);
+    });
+  }
+
+</script>
+</body>
+</html>

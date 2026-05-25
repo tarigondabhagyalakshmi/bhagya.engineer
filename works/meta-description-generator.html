@@ -43,6 +43,7 @@ select option{background:#1a1730}
 textarea{min-height:100px;resize:vertical;line-height:1.6}
 .btn-go{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--s),#3B82F6);color:#fff;border:none;border-radius:10px;padding:12px 28px;font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .25s;margin-top:8px}
 .btn-go:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.4)}
+/* Variant cards */
 .variant-card{background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px}
 .var-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .var-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px;text-transform:uppercase;letter-spacing:.08em}
@@ -61,11 +62,13 @@ textarea{min-height:100px;resize:vertical;line-height:1.6}
 .btn-copy{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--muted);border-radius:7px;padding:6px 14px;font-size:.75rem;cursor:pointer;transition:all .2s}
 .btn-copy:hover{background:rgba(255,255,255,.12);color:var(--text)}
 .btn-copy.copied{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6EE7B7}
+/* SERP preview */
 .serp-preview{background:#fff;border-radius:12px;padding:14px;margin-top:12px}
 .sp-domain{font-size:11px;color:#202124;font-family:Arial,sans-serif;margin-bottom:2px}
 .sp-title{font-size:16px;color:#1a0dab;font-family:Arial,sans-serif;line-height:1.3;margin-bottom:3px;font-weight:400}
 .sp-desc-text{font-size:12px;color:#4d5156;font-family:Arial,sans-serif;line-height:1.6}
 .serp-preview-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+/* Orbs */
 .orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:.07}
 .o1{width:500px;height:500px;background:var(--s);top:-200px;right:-150px}
 .o2{width:400px;height:400px;background:var(--pk);bottom:-100px;left:-80px}
@@ -88,11 +91,13 @@ footer a{color:var(--p);text-decoration:none}
   </a>
   <a href="/blog/" class="nav-back" style="margin-left:8px">Blog</a>
 </nav>
+
 <div class="hero">
   <div class="badge">📄 Meta Generator</div>
   <h1>Meta Description <span>Generator</span></h1>
   <p>Enter your page topic, keyword and CTA style — get 3 click-worthy meta descriptions under 155 chars with live SERP preview.</p>
 </div>
+
 <div class="wrap">
   <div class="card">
     <h2>✍️ Page Details</h2>
@@ -131,8 +136,10 @@ footer a{color:var(--p);text-decoration:none}
       Generate Descriptions
     </button>
   </div>
+
   <div id="resultsSection" style="display:none"></div>
 </div>
+
 <footer>Built by <a href="https://bhagya.engineer">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;·&nbsp; <a href="/works/">← All Tools</a> &nbsp;·&nbsp; <a href="/blog/">Blog</a></footer>
 
 <script>
@@ -144,30 +151,56 @@ const CTA_MAP = {
   download: ['Download the free guide today.','Get your free report now.','Download in one click.'],
   view: ['View all options in one place.','Explore top picks for 2025.','See what fits your needs.']
 };
-function descStatus(len){ if(len<80) return 'warn'; if(len<=155) return 'ok'; return 'bad'; }
+
+function descStatus(len){
+  if(len<80) return 'warn';
+  if(len<=155) return 'ok';
+  return 'bad';
+}
 function barColor(s){ return s==='ok'?'#10B981':s==='warn'?'#F59E0B':'#E11D48'; }
+
 function generateDescriptions(){
   const kw = document.getElementById('keyword').value.trim();
   const topic = document.getElementById('topic').value.trim();
   const pageTitle = document.getElementById('pageTitle').value.trim();
   const ctaStyle = document.getElementById('ctaStyle').value;
   const brand = document.getElementById('brand').value.trim();
+
   if(!kw && !topic){ alert('Please enter at least a keyword or page topic.'); return; }
+
   const ctas = CTA_MAP[ctaStyle] || CTA_MAP['compare'];
   const kwDisplay = kw || (pageTitle.split(' ').slice(0,4).join(' '));
   const topicShort = topic ? topic.split('.')[0].trim() : kwDisplay;
   const brandStr = brand ? ` | ${brand}` : '';
+
+  // 3 formula-based descriptions
   const descs = [
-    { style: 'Informational', color: '#6EE7B7', bgColor: 'rgba(16,185,129,.12)', borderColor: 'rgba(16,185,129,.4)',
+    {
+      style: 'Informational',
+      color: '#6EE7B7',
+      bgColor: 'rgba(16,185,129,.12)',
+      borderColor: 'rgba(16,185,129,.4)',
       text: buildTrimmed(`${topicShort}. ${ctas[0]}${brandStr}`, 155),
-      reason: 'Leads with the core value proposition. Works well for informational and research queries.' },
-    { style: 'Action-Oriented', color: '#93C5FD', bgColor: 'rgba(59,130,246,.12)', borderColor: 'rgba(59,130,246,.4)',
+      reason: 'Leads with the core value proposition. Works well for informational and research queries.'
+    },
+    {
+      style: 'Action-Oriented',
+      color: '#93C5FD',
+      bgColor: 'rgba(59,130,246,.12)',
+      borderColor: 'rgba(59,130,246,.4)',
       text: buildTrimmed(`Looking for ${kwDisplay}? ${topicShort}. ${ctas[1]}`, 155),
-      reason: 'Mirrors the user query to improve relevance signals, then delivers the value. High CTR formula.' },
-    { style: 'Benefit-Led', color: '#FCD34D', bgColor: 'rgba(245,158,11,.12)', borderColor: 'rgba(245,158,11,.4)',
+      reason: 'Mirrors the user query to improve relevance signals, then delivers the value. High CTR formula.'
+    },
+    {
+      style: 'Benefit-Led',
+      color: '#FCD34D',
+      bgColor: 'rgba(245,158,11,.12)',
+      borderColor: 'rgba(245,158,11,.4)',
       text: buildTrimmed(`${ctas[2].replace('.','')}: ${topicShort}. Find the best ${kwDisplay} for your needs.`, 155),
-      reason: 'Puts the user benefit first. Strong for competitive keywords where differentiation matters.' }
+      reason: 'Puts the user benefit first. Strong for competitive keywords where differentiation matters.'
+    }
   ];
+
   let html = '';
   descs.forEach((d,i)=>{
     const s = descStatus(d.text.length);
@@ -205,13 +238,16 @@ function generateDescriptions(){
   document.getElementById('resultsSection').style.display = 'block';
   document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function buildTrimmed(str, max){
   if(str.length <= max) return str;
+  // Try trimming from end at word boundary
   let trimmed = str.slice(0, max-1);
   const lastSpace = trimmed.lastIndexOf(' ');
   if(lastSpace > max*0.7) trimmed = trimmed.slice(0, lastSpace);
   return trimmed + '…';
 }
+
 function copyText(text, btn){
   navigator.clipboard.writeText(text).then(()=>{
     btn.classList.add('copied');
@@ -219,6 +255,7 @@ function copyText(text, btn){
     setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Description';}, 2000);
   });
 }
+
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 </script>
 </body>

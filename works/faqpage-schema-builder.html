@@ -33,6 +33,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:10px}
 .card h2{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700}
 .card>p{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+/* FAQ pair */
 .faq-pairs{display:flex;flex-direction:column;gap:16px}
 .faq-pair{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative}
 .pair-num{position:absolute;top:14px;left:18px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);padding:2px 8px;border-radius:50px}
@@ -44,10 +45,12 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .pair-inner textarea{min-height:72px;resize:vertical;line-height:1.6}
 .btn-remove{position:absolute;top:14px;right:16px;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.2);color:#FDA4AF;border-radius:6px;padding:3px 9px;font-size:.72rem;cursor:pointer;transition:all .2s}
 .btn-remove:hover{background:rgba(225,29,72,.2)}
+/* Buttons */
 .btn-add{display:inline-flex;align-items:center;gap:7px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#C4B5FD;border-radius:10px;padding:10px 20px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:20px}
 .btn-add:hover{background:rgba(139,92,246,.2)}
 .btn-go{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7C3AED,#4F46E5);color:#fff;border:none;border-radius:10px;padding:12px 28px;font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .25s}
 .btn-go:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.4)}
+/* Output */
 .output-section{display:none}
 .output-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px}
 .output-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}
@@ -57,14 +60,17 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .btn-copy-all.copied{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6EE7B7}
 .code-block{background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:12px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;color:#E2E8F0;overflow-x:auto;white-space:pre;word-break:break-word;max-height:500px;overflow-y:auto}
 .code-block .key{color:#C4B5FD}.code-block .str{color:#6EE7B7}.code-block .punc{color:#64748b}
+/* Validation summary */
 .val-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
 .vs-card{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
 .vs-num{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;line-height:1}
 .vs-lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+/* Tips */
 .tips-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;margin-top:20px}
 .tips-title{font-size:.75rem;font-weight:700;color:#6EE7B7;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
 .tips-list{display:flex;flex-direction:column;gap:6px}
 .tip{font-size:.8rem;color:var(--muted);display:flex;gap:8px}
+/* Orbs */
 .orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:.07}
 .o1{width:500px;height:500px;background:var(--pk);top:-200px;right:-150px}
 .o2{width:400px;height:400px;background:var(--s);bottom:-100px;left:-80px}
@@ -87,11 +93,13 @@ footer a{color:var(--p);text-decoration:none}
   </a>
   <a href="/blog/" class="nav-back" style="margin-left:8px">Blog</a>
 </nav>
+
 <div class="hero">
   <div class="badge">🔧 Schema Builder</div>
   <h1>FAQPage <span>Schema Builder</span></h1>
   <p>Enter up to 10 Q&amp;A pairs and get production-ready FAQPage JSON-LD schema markup — paste directly into your &lt;head&gt; for Google rich results.</p>
 </div>
+
 <div class="wrap">
   <div class="card">
     <div class="card-header">
@@ -99,7 +107,9 @@ footer a{color:var(--p);text-decoration:none}
       <span style="font-size:.78rem;color:var(--muted)" id="pairCount">1 / 10 pairs</span>
     </div>
     <p>Add your questions and answers. Minimum 1, maximum 10 pairs.</p>
-    <div class="faq-pairs" id="faqPairs"></div>
+    <div class="faq-pairs" id="faqPairs">
+      <!-- Pairs injected by JS -->
+    </div>
     <button class="btn-add" onclick="addPair()" id="addBtn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
       Add Another FAQ
@@ -109,6 +119,7 @@ footer a{color:var(--p);text-decoration:none}
       Generate Schema
     </button>
   </div>
+
   <div class="output-section" id="outputSection">
     <div class="val-strip" id="valStrip"></div>
     <div class="output-topbar">
@@ -135,7 +146,9 @@ footer a{color:var(--p);text-decoration:none}
     </div>
   </div>
 </div>
+
 <footer>Built by <a href="https://bhagya.engineer">Bhagya Lakshmi T</a> · SEO Team Lead · BankBazaar &nbsp;·&nbsp; <a href="/works/">← All Tools</a> &nbsp;·&nbsp; <a href="/blog/">Blog</a></footer>
+
 <script>
 let pairCount = 0;
 
